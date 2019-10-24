@@ -7,7 +7,3 @@ from main import LoginApp
 class EquipamentoApp(Screen):
     def build(self):    
         return Builder.load_file('equipamento.kv')
-            
-
-
-
