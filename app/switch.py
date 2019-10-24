@@ -12,5 +12,10 @@ class MainApp(App):
     def build(self):
         return sm
 
+    def login(self, nome, fazenda):
+        self.nome = nome
+        self.fazenda = fazenda
+        print(nome, fazenda)
+
 if __name__ == "__main__":
     MainApp().run()
