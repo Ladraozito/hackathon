@@ -57,7 +57,7 @@ class MainApp(App):
     def guardaDados(self,descricaoitem,valoritem,TempoUsoitem,vidaUtilItem):
         trocaponto = valoritem.replace(",", ".")
         valoritemconvertido = float (trocaponto)
-        self.valoratualItem = (TempoUsoItem*(valoritem/vidaUtilItem)-valoritem)
+        self.valoratualItem = (TempoUsoitem*(valoritem/vidaUtilItem)-valoritem)
 
     def voltamenu(self):
         sm.current = 'menu'
