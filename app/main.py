@@ -8,7 +8,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from equipamento import EquipamentoApp
 from login import LoginApp
 from home import MeuMenuApp
-
+from despesas import despesasApp 
 import os.path 
 import sqlite3 as lite
 from datetime import date 
@@ -18,6 +18,7 @@ sm = ScreenManager()
 sm.add_widget(LoginApp(name='login'))
 sm.add_widget(MeuMenuApp(name='menu'))
 sm.add_widget(EquipamentoApp(name='equipamento'))
+sm.add_widget(despesasApp(name='despesas'))
 
 if not os.path.exists('./dados.db'):
     conn = lite.connect('dados.db')
