@@ -11,12 +11,12 @@ FloatLayout:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'background.jpg'
+            source: 'images/background.jpg'
 
     Image:
         size_hint: .3, .2,
         pos_hint: {"center_x": .5, "center_y": .75}
-        source: 'logo.png'
+        source: 'images/logo.png'
     Label:
         id: msg
         size_hint: .7, .1
