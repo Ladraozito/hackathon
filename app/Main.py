@@ -1,6 +1,7 @@
 from kivy.app import App
 from kivy.lang import Builder
 
+
 main_widget_kv = """
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 
@@ -34,6 +35,7 @@ FloatLayout:
             valign: 'middle'
             color: get_color_from_hex('#000000')
         TextInput:
+            id: nome
             multiline: False
         Label:
             text: "Nome da fazenda:"
@@ -44,14 +46,17 @@ FloatLayout:
             color: get_color_from_hex('#000000')    
             Label:
         TextInput:
+            id: fazenda
             multiline: False
         
         Label:
         Button:
             size_hint: 2., 2.
             text: "REGISTRAR-SE"
-            on_release: app.login()
+            on_release: app.login(nome.text, fazenda.text)
 """
+
+
 
 
 class LoginApp(App):
@@ -59,8 +64,9 @@ class LoginApp(App):
         main_widget = Builder.load_string(main_widget_kv)
         return main_widget
     
-    def login(self):
-        print(self)
+    def login(self, nome, fazenda):
+        self.nome = nome
+        self.fazenda = fazenda
 
 
 LoginApp().run()
