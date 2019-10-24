@@ -60,16 +60,16 @@ while not butao:
                 on_press :
                     butao = True
                 on_release: app.login()
+                
     """
 
-    class LoginApp(App):
+class LoginApp(App):
+    def build(self):
+        main_widget = Builder.load_string(main_widget_kv)
+        return main_widget
+    
+    def login(self):
+        print(self)
 
-        def build(self):
-            main_widget = Builder.load_string(main_widget_kv)
-            return main_widget
 
-    if butao:
-        print("FUNCIONOU")
-
-
-    LoginApp().run()
+LoginApp().run()
