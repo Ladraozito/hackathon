@@ -59,6 +59,7 @@
             Label:
             Button:
                 text: "REGISTRAR-SE"
+                
                 size_hint: 2., 2.
                 on_release: app.login(nome.text, fazenda.text)
 
@@ -100,7 +101,8 @@
                         
                     ActionButton:
                         text: 'DESPESAS'
-                        on_press: app.telaDespesa()
+                        on_press: print("ENTRA NA DESPESA")
+                        
                         
                     ActionButton:
                         text: 'VENDA'
