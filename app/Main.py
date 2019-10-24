@@ -7,14 +7,14 @@ main_widget_kv = """
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 
 FloatLayout:
-    canvas.before:
-        Color:
-            rgba: get_color_from_hex('#CDFFCC')
+    canvas.before: 
         Rectangle:
             pos: self.pos
             size: self.size
+            source: 'background.jpg'
+
     Image:
-        size_hint: .5, .5,
+        size_hint: .3, .2,
         pos_hint: {"center_x": .5, "center_y": .75}
         source: 'logo.png'
     Label:
@@ -30,21 +30,25 @@ FloatLayout:
 
         Label:
             text: "Nome do proprietario:"
-            size_hint_x: .3
+            font_name: 'Roboto-BoldItalic'
+            size_hint_x: .6
             text_size: self.size
             halign: 'left'
             valign: 'middle'
-            color: get_color_from_hex('#000000')
+            color: get_color_from_hex('#FFFFFF')
+            bold: True
         TextInput:
             id: nome
             multiline: False
         Label:
             text: "Nome da fazenda:"
-            size_hint_x: .3
+            font_name: 'Roboto-BoldItalic'
+            size_hint_x: .6
             text_size: self.size
             halign: 'left'
             valign: 'middle'
-            color: get_color_from_hex('#000000')    
+            color: get_color_from_hex('#FFFFFF')
+            bold: True    
             Label:
         TextInput:
             id: fazenda
