@@ -57,7 +57,7 @@ class MainApp(App):
         sm.current = 'equipamento'
      
 
-
+    
     def guardaDados(self,descricaoitem,valoritem,tempoUsoitem,vidaUtilItem):
         if not valoritem:
             valoritem = 0.0
@@ -86,7 +86,6 @@ class MainApp(App):
     def voltamenu(self):
         sm.current = 'menu'
 
-        
 
 if __name__ == "__main__":
     sm.current = 'login'
