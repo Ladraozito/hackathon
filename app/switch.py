@@ -19,7 +19,7 @@ sm.add_widget(EquipamentoApp(name='equipamento'))
 if not os.path.exists('./dados.db'):
     conn = lite.connect('dados.db')
     cursor = conn.cursor()
-    cursor.execute('''CREATE TABLE credencias('
+    cursor.execute('''CREATE TABLE credencias(
         nome varchar(255) NOT NULL,
         fazenda varchar(255) NOT NULL
     )''')
