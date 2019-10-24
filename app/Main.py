@@ -14,9 +14,9 @@ FloatLayout:
             pos: self.pos
             size: self.size
     Image:
-        size_hint: .3, .1,
+        size_hint: .5, .5,
         pos_hint: {"center_x": .5, "center_y": .75}
-        source: 'logotamba.png'
+        source: 'logo.png'
     Label:
         id: msg
         size_hint: .7, .1
