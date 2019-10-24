@@ -151,20 +151,16 @@
             color: [1, 1, 1, 1]
             font_size: '15sp' 
             pos_hint: {"center_x": .5, "center_y": .9}
-        GridLayout:
-            Label:
-                text: 'Nome Proprietario'
-                font_name: 'Roboto-BoldItalic'
-                size_hint_x: .6
-                text_size: self.size
-                halign: 'left'
-                valign: 'middle'
-                color: get_color_from_hex('#FFFFFF')
-                bold: True
-                Label:
-                TextInput:
-                    id: fazenda
-                    multiline: False
+
+        TextInput:
+            hint_text: 'Nome do Equpamento. Exemplo: Moto'
+            multiline: False
+            height: 30
+            width: 350
+            top: 100
+            size_hint: None, None
+            pos_hint: {'center_x': .3, 'center_y': .8}
+            id: descricao
 
         TextInput:
             hint_text:"Quanto pagou pelo equipamento? Ex:50"
@@ -208,6 +204,7 @@
             top: 60
             size_hint: None, None
             pos_hint: {"center_x": .5, "center_y": .2}
+<<<<<<< HEAD:app/kv_modules/main_widget.kv
             on_release: app.guardaDados(descricao.text,valor.text,TempoUso.text,vidautil.text)
 <DepesasApp>
     FloatLayout:
@@ -280,4 +277,7 @@
             top: 60
             size_hint: None, None
             pos_hint: {"center_x": .5, "center_y": .2}
-           
+            on_release: app.guardaDados(descricao.text,valor.text,TempoUso.text,vidautil.text)
+=======
+            on_release: app.guardaDados(descricao.text,valor.text,TempoUso.text,vidaUtil.text)
+>>>>>>> ccc9fe541032b1feb2fcad057ce09579d6f500c2:app/kv_modules/widgets.kv
