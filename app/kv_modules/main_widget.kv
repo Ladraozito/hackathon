@@ -26,7 +26,7 @@
             pos_hint: {"center_x": .5, "center_y": .5}
 
             Label:
-                text: "Nome do proprietario:"
+                text: 'Nome Proprietario'
                 font_name: 'Roboto-BoldItalic'
                 size_hint_x: .6
                 text_size: self.size
@@ -58,9 +58,14 @@
                 on_release: app.login(nome.text, fazenda.text)
 
 <MeuMenuApp>
+    FloatLayout:
+        canvas.before: 
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.jpg'
     BoxLayout:
         orientation: 'vertical'
-    
         ActionBar:               #definimos a ActionBAr
             id: actBar
             pos_hint: {'top':1}  #na parte superior da tela
@@ -143,6 +148,11 @@
     
 <EquipamentoApp>
     FloatLayout:
+        canvas.before: 
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.jpg'
         Label:
             text:'INVENTARIO DE EQUIPAMENTOS E BENFEITORIAS'
             size: self.texture_size
@@ -151,13 +161,14 @@
             font_size: '30sp' 
             pos_hint: {"center_x": .5, "center_y": .9}    
         TextInput:
-            hint_text:"Digite o nome do equipamento Ex:disco roçadeira"
+            hint_text:"Digite o nome do equipamento Ex:Motor"
             multiline: False
             height: "30px"
             width: 350
             top: 100
             size_hint: None, None
             pos_hint: {"center_x": .3, "center_y": .8}
+            id : descricao
         TextInput:
             hint_text:"Quanto pagou pelo equipamento? Ex:50"
             multiline: False
@@ -166,6 +177,7 @@
             top: 100
             size_hint: None, None
             pos_hint: {"center_x": .3, "center_y": .7}
+            id : valor
         TextInput:
             hint_text:"Ah quantos anos voce possui este equipamento? Ex:5"
             multiline: False
@@ -174,6 +186,7 @@
             top: 100
             size_hint: None, None
             pos_hint: {"center_x": .3, "center_y": .6}
+            id : TempoUso
         TextInput:
             hint_text:"Qual o tempo de vida util deste equipemento? Ex: 10"
             multiline: False
@@ -182,11 +195,12 @@
             top: 100
             size_hint: None, None
             pos_hint: {"center_x": .3, "center_y": .5} 
-           
+            id : vidaUtil
            
         Button:
-            text:"Confirmar Dados"
+            text:"INSERIR DADOS"
             height: 35
             top: 60
             size_hint: None, None
             pos_hint: {"center_x": .5, "center_y": .2}
+            on_release: app.guardaDados(descricao.text,valor.text,TempoUso.text,vidautil.text)

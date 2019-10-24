@@ -9,6 +9,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from equipamento import EquipamentoApp
 from main import LoginApp
 from home2 import MeuMenuApp
+from datetime import date 
 
 Builder.load_file('kv_modules/main_widget.kv')
 sm = ScreenManager()
@@ -21,10 +22,16 @@ if not os.path.exists('./dados.db'):
     cursor = conn.cursor()
     cursor.execute('''CREATE TABLE credencias('
         nome varchar(255) NOT NULL,
-        fazenda varchar(255) NOT NULL
+        fazenda varchar(255) NOT NULL,
+        desc_item varchar(255) NOT NULL,
+        valor_item integer NOT NULL,
+        tempoUso integer  NOT NULL,
+        vidaUtil  NOT NULL,
     )''')
 
+
 class MainApp(App):
+
     def build(self):
         return sm
 
@@ -45,6 +52,16 @@ class MainApp(App):
         arquivo.close()
     def telaEquipamento(self):
         sm.current = 'equipamento'
+
+
+    def guardaDados(self,descricaoitem,valoritem,TempoUsoitem,vidaUtilItem):
+        trocaponto = valoritem.replace(",", ".")
+        valoritemconvertido = float (trocaponto)
+        self.valoratualItem = (TempoUsoItem*(valoritem/vidaUtilItem)-valoritem)
+        
+        
+
+
 
 
    
