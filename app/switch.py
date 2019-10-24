@@ -53,12 +53,6 @@ class MainApp(App):
     def telaEquipamento(self):
         sm.current = 'equipamento'
 
-
-    def guardaDados(self,descricaoitem,valoritem,TempoUsoitem,vidaUtilItem):
-        trocaponto = valoritem.replace(",", ".")
-        valoritemconvertido = float (trocaponto)
-       self.valoratualItem = (TempoUsoItem*(valoritem/vidaUtilItem)-valoritem)
-
     def voltamenu(self):
         sm.current = 'menu'
 

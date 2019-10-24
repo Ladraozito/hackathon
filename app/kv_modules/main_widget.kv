@@ -1,7 +1,6 @@
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 <MyCheckbox@BoxLayout+ActionItem>: # Esta é a forma de definirmos herança no .kv
     ActionLabel:
-        text: 'Selec.'
     ActionCheck:
 
 <LoginApp>
@@ -119,7 +118,7 @@
                     ActionButton:
                         text: 'Observar GERAL'
                                 
-                    MyCheckbox:    #aqui criamos um novo widget, a que chamamos MyCheckBox
+            
                             
                             
                 ActionGroup:
@@ -133,19 +132,6 @@
                 ActionToggleButton:
                     text: 'Press. para alterar' #este botão mantém o ultimo estado (pressionado ou não)
             
-        Label:
-            text: 'INFORMACOES DO SITIO'  #labels que identificam o experimento
-            size: self.texture_size
-            bold: True
-            color: [0, 0, 1, 1]
-            font_size: '40sp'      
-                    
-        Label:
-            text: 'SEM DADOS PARA MOSTRAR'
-            size: self.texture_size
-            bold: True
-            color: [0, 0, 1, 1]
-            font_size: '30sp'      
                     
                                     #aqui criamos uma classe que deriva do ActionItem
                                     #(exigência do ActionView. Esta classe contem um
@@ -162,19 +148,23 @@
             text:'INVENTARIO DE EQUIPAMENTOS E BENFEITORIAS'
             size: self.texture_size
             bold: True
-            color: [0, 0, 1, 1]
-            font_size: '30sp' 
+            color: [1, 1, 1, 1]
+            font_size: '15sp' 
             pos_hint: {"center_x": .5, "center_y": .9}
-
-        TextInput:
-            hint_text:"Digite o nome do equipamento Ex:Motor"
-            multiline: False
-            height: "30px"
-            width: 350
-            top: 100
-            size_hint: None, None
-            pos_hint: {"center_x": .3, "center_y": .8}
-            id : descricao
+        GridLayout:
+            Label:
+                text: 'Nome Proprietario'
+                font_name: 'Roboto-BoldItalic'
+                size_hint_x: .6
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+                color: get_color_from_hex('#FFFFFF')
+                bold: True
+                Label:
+                TextInput:
+                    id: fazenda
+                    multiline: False
 
         TextInput:
             hint_text:"Quanto pagou pelo equipamento? Ex:50"
