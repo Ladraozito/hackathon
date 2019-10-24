@@ -19,19 +19,18 @@ sm.add_widget(LoginApp(name='login'))
 sm.add_widget(MeuMenuApp(name='menu'))
 sm.add_widget(EquipamentoApp(name='equipamento'))
 
-
 if not os.path.exists('./dados.db'):
-    conn = lite.connect('dados.db')
+    conn = lite.connect('./dados.db')
     cursor = conn.cursor()
-    cursor.execute('''CREATE TABLE credencias('
-        nome varchar(255) NOT NULL,
-        fazenda varchar(255) NOT NULL,
+    cursor.execute('''CREATE TABLE equipamento(
         desc_item varchar(255) NOT NULL,
         valor_item integer NOT NULL,
         tempoUso integer  NOT NULL,
-        vidaUtil integer NOT NULL,
+        vidaUtil integer NOT NULL
     )''')
 
+conn = lite.connect('./dados.db')
+cursor = conn.cursor()
 
 class MainApp(App):
 
@@ -53,6 +52,7 @@ class MainApp(App):
         self.nome = dados[0].split(',')[1]
         self.fazenda = dados[1].split(',')[1]
         arquivo.close()
+
     def telaEquipamento(self):
         sm.current = 'equipamento'
      
@@ -81,20 +81,8 @@ class MainApp(App):
             perdaAnual = valoritem/vidaUtilItem
         
         self.valoratualItem = (tempoUsoitem*perdaAnual-valoritem)
-        cursor.execute('''INSERT INTO credenciais (nome,fazenda,desc_item,valor_item,tempoUso,vidaUtil''')
-    def update_database(self):
-        cursor.execute("INSERT INTO credenciais(nome,fazenda,desc_item,valor_item,tempoUso,vidaUtil)\
-            VALUES(?, ?, ?, ?, ?, ?, ?)",
-                (str(self.nome.get()),
-                str(self.fazenda.get()),
-                str(self.desc_item.get()),
-                str(self.valor_item.get()),
-                str(self.tempoUso.get()),
-                str(self.valor_item.get()),
-                str(self.vidaUtil.get()),
-                )
-            )
-                       
+        cursor.execute('''INSERT INTO equipamento (desc_item,valor_item,tempoUso,vidaUtil)
+            VALUES(?, ?, ?, ?)''',(descricaoitem,valoritem,tempoUsoitem,vidaUtilItem))               
     def voltamenu(self):
         sm.current = 'menu'
 
