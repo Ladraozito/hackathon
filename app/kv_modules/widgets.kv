@@ -58,8 +58,8 @@
             
             Label:
             Button:
-                size_hint: 2., 2.
                 text: "REGISTRAR-SE"
+                size_hint: 2., 2.
                 on_release: app.login(nome.text, fazenda.text)
 
 <MeuMenuApp>
@@ -144,64 +144,44 @@
                 pos: self.pos
                 size: self.size
                 source: 'images/background.jpg'
-        Label:
-            text:'INVENTARIO DE EQUIPAMENTOS E BENFEITORIAS'
-            size: self.texture_size
-            bold: True
-            color: [1, 1, 1, 1]
-            font_size: '15sp' 
-            pos_hint: {"center_x": .5, "center_y": .9}
+        
+        GridLayout:
+            cols: 1
+            spacing: 5
+            size_hint: .7, .37
+            pos_hint: {'center_x': .5, 'center_y': .5}
 
-        TextInput:
-            hint_text: 'Nome do Equpamento. Exemplo: Moto'
-            multiline: False
-            height: 30
-            width: 350
-            top: 100
-            size_hint: None, None
-            pos_hint: {'center_x': .3, 'center_y': .8}
-            id: descricao
+            Label:
+                text:'INVENTARIO DE EQUIPAMENTOS'
+                size_hint_x: .6
+                color: get_color_from_hex('#FFFFFF')
+                bold: True 
 
-        TextInput:
-            hint_text:"Quanto pagou pelo equipamento? Ex:50"
-            multiline: False
-            height: "30px"
-            width: 350
-            top: 100
-            size_hint: None, None
-            pos_hint: {"center_x": .3, "center_y": .7}
-            id : valor
-            input_filter: 'float'
+            TextInput:
+                hint_text: 'Nome do Equpamento. Exemplo: Moto'
+                multiline: False
+                id: descricao
 
-        TextInput:
-            hint_text:"Ah quantos anos voce possui este equipamento? Ex:5"
-            multiline: False
-            height: "30px"
-            width: 350
-            top: 100
-            size_hint: None, None
-            pos_hint: {"center_x": .3, "center_y": .6}
-            id : TempoUso
-            input_filter: 'int'
+            TextInput:
+                hint_text:"Quanto pagou pelo equipamento? Ex:50"
+                multiline: False
+                id : valor
+                input_filter: 'float'
 
-        TextInput:
-            hint_text:"Qual o tempo de vida util deste equipemento? Ex: 10"
-            multiline: False
-            height: "30px"
-            width: 350
-            top: 100
-            size_hint: None, None
-            pos_hint: {"center_x": .3, "center_y": .5} 
-            id : vidaUtil
-           
-            pos_hint: {"center_x": .3, "center_y": .5}
-            input_filter: 'int'
-            
-        Button:
-            text:"INSERIR DADOS"
-            on_release: root.voltamenu()
-            height: 35
-            top: 60
-            size_hint: None, None
-            pos_hint: {"center_x": .5, "center_y": .2}
-            on_release: app.guardaDados(descricao.text,valor.text,TempoUso.text,vidaUtil.text)
+            TextInput:
+                hint_text:"Ah quantos anos voce possui este equipamento? Ex:5"
+                multiline: False
+                id : TempoUso
+                input_filter: 'int'
+
+            TextInput:
+                hint_text:"Qual o tempo de vida util deste equipemento? Ex: 10"
+                multiline: False
+                id : vidaUtil
+                input_filter: 'int'
+                
+            Button:
+                text:"INSERIR DADOS"
+                size_hint: 2., 2.
+                on_release: root.voltamenu()
+                on_release: app.guardaDados(descricao.text,valor.text,TempoUso.text,vidaUtil.text)
