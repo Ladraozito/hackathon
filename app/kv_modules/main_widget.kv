@@ -1,4 +1,3 @@
-#:kivy
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 <LoginApp>
     FloatLayout:
@@ -70,7 +69,7 @@
                 use_separator: True #A actionview terá uma separação entre os objetos
                 
                 ActionPrevious:
-                    title: 'josevaldo' # Texto identificador do menu
+                    title: app.nome # Texto identificador do menu
                     with_previous: False
                     
                 ActionOverflow:
