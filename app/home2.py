@@ -3,6 +3,7 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
+from main import LoginApp
   
 arquivo = open('dados.txt','r',encoding="utf-8")
 dados = arquivo.readlines()

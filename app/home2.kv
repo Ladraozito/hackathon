@@ -1,4 +1,4 @@
-BoxLayout:
+BoxLayout:                    
     orientation: 'vertical'
  
     ActionBar:               #definimos a ActionBAr
@@ -23,22 +23,22 @@ BoxLayout:
                 on_press: print('DEVE IR PARA OUTRA TELA')  #quando pressionado vai mostrar isto na tela do terminal
                      
             ActionGroup:
-                text: 'CADASTRAR ' #criamos um grupo de botões debaixo do botão "Arquivo"
+                text: 'CADASTRAR ' #criamos um grupo de botões debaixo do botão "cadastrar"
                 ActionButton:
                     text: 'EQUIPEMENTOS'            # é sempre o nome do botão _ ação a ser executada
-                    on_press: print('Pressionado Abrir')
+                    on_press: print('ir para equipamentos')
                      
                 ActionButton:
                     text: 'DESPESAS'
-                    on_press: print('Pressionado Salvar')
+                    on_press: print('ir para despesas')
                      
                 ActionButton:
                     text: 'VENDA'
-                    on_press: print('Pressionado Salvar como...')
+                    on_press: print('ir para venda')
                  
                 ActionButton:
                     text: 'PROPRIEDADE'
-                    on_press: print('Pressionado Sair')
+                    on_press: print('ir para propriedade')
                      
             ActionGroup:
                 text: 'RELATORIOS'
@@ -60,13 +60,13 @@ BoxLayout:
                     text: 'Ajuda'                  
  
             ActionToggleButton:
-                text: 'Press. para alterar' #este botão mantém o ultimo estado (pressionado ou não)
+                text: '' #este botão mantém o ultimo estado (pressionado ou não)
          
     Label:
-        text: 'INFORMACOES DO SITIO'  #labels que identificam o experimento
+        text: 'MUITO BEM VINDO'  
         size: self.texture_size
         bold: True
-        color: [0, 0, 1, 1]
+        color: [1, 0, 0, 1]
         font_size: '40sp'      
                  
     Label:
