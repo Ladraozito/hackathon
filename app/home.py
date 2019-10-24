@@ -2,14 +2,37 @@ from kivy.uix.dropdown import DropDown
 from kivy.uix.button import Button
 from kivy.base import runTouchApp
 dropdown = DropDown()
-for index in range(10):
     
-    btn = Button(text='Value %d' % index, size_hint_y=None, height=44)
+item1 = Button(text='Informações da propriedade', size_hint_y=None, height=44)
 
 
 
-    dropdown.add_widget(btn)
+dropdown.add_widget(item1)
+item2 = Button(text='informar despesas', size_hint_y=None, height=44)
 
+
+
+dropdown.add_widget(item2)
+item3 = Button(text='Relatorio GERAL', size_hint_y=None, height=44)
+
+
+
+dropdown.add_widget(item3)
+item4 = Button(text='DEPESAS', size_hint_y=None, height=44)
+
+
+
+dropdown.add_widget(item4)
+item5 = Button(text='LUCRATIVIDADE', size_hint_y=None, height=44)
+
+
+
+dropdown.add_widget(item5)
+item6 = Button(text='Informar LUCRO', size_hint_y=None, height=44)
+
+
+
+dropdown.add_widget(item6)
 
 mainbutton = Button(text='MENU', size_hint=(0.2, 0.2))
 
