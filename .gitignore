@@ -107,4 +107,4 @@ venv.bak/
 .idea/
 
 # arquivos
-dados.txt
+dados.*

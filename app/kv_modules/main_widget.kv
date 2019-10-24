@@ -142,17 +142,51 @@
                                     #label e um botão do tipo check
     
 <EquipamentoApp>
-    FloatLayout 
+    FloatLayout:
+        Label:
+            text:'INVENTARIO DE EQUIPAMENTOS E BENFEITORIAS'
+            size: self.texture_size
+            bold: True
+            color: [0, 0, 1, 1]
+            font_size: '30sp' 
+            pos_hint: {"center_x": .5, "center_y": .9}    
         TextInput:
-            text:"informe o nome do equipamento"
+            hint_text:"Digite o nome do equipamento Ex:disco roçadeira"
+            multiline: False
             height: "30px"
             width: 350
             top: 100
             size_hint: None, None
-            pos_hint: {"center_x": .5, "center_y": .5}
+            pos_hint: {"center_x": .3, "center_y": .8}
+        TextInput:
+            hint_text:"Quanto pagou pelo equipamento? Ex:50"
+            multiline: False
+            height: "30px"
+            width: 350
+            top: 100
+            size_hint: None, None
+            pos_hint: {"center_x": .3, "center_y": .7}
+        TextInput:
+            hint_text:"Ah quantos anos voce possui este equipamento? Ex:5"
+            multiline: False
+            height: "30px"
+            width: 350
+            top: 100
+            size_hint: None, None
+            pos_hint: {"center_x": .3, "center_y": .6}
+        TextInput:
+            hint_text:"Qual o tempo de vida util deste equipemento? Ex: 10"
+            multiline: False
+            height: "30px"
+            width: 350
+            top: 100
+            size_hint: None, None
+            pos_hint: {"center_x": .3, "center_y": .5} 
+           
+           
         Button:
-            text:"Confirmar"
-            height: 30
+            text:"Confirmar Dados"
+            height: 35
             top: 60
             size_hint: None, None
             pos_hint: {"center_x": .5, "center_y": .2}

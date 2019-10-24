@@ -1,4 +1,6 @@
 import kivy
+import sqlite3 as lite
+import os.path 
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.lang import Builder
@@ -13,6 +15,14 @@ sm = ScreenManager()
 sm.add_widget(LoginApp(name='login'))
 sm.add_widget(MeuMenuApp(name='menu'))
 sm.add_widget(EquipamentoApp(name='equipamento'))
+
+if not os.path.exists('./dados.db'):
+    conn = lite.connect('dados.db')
+    cursor = conn.cursor()
+    cursor.execute('''CREATE TABLE credencias('
+        nome varchar(255) NOT NULL,
+        fazenda varchar(255) NOT NULL
+    )''')
 
 class MainApp(App):
     def build(self):
