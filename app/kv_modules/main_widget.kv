@@ -1,4 +1,8 @@
 #:import get_color_from_hex kivy.utils.get_color_from_hex
+<MyCheckbox@BoxLayout+ActionItem>: # Esta é a forma de definirmos herança no .kv
+    ActionLabel:
+        text: 'Selec.'
+    ActionCheck:
 <LoginApp>
     FloatLayout:
         canvas.before: 
@@ -83,7 +87,7 @@
                     text: 'CADASTRAR ' #criamos um grupo de botões debaixo do botão "Arquivo"
                     ActionButton:
                         text: 'EQUIPEMENTOS'            # é sempre o nome do botão _ ação a ser executada
-                        on_press: print('Pressionado Abrir')
+                        on_press: app.telaEquipamento()   
                         
                     ActionButton:
                         text: 'DESPESAS'
@@ -137,7 +141,18 @@
                                     #(exigência do ActionView. Esta classe contem um
                                     #label e um botão do tipo check
     
-<MyCheckbox@BoxLayout+ActionItem>: # Esta é a forma de definirmos herança no .kv
-    ActionLabel:
-        text: 'Selec.'
-    ActionCheck:
+<EquipamentoApp>
+FloatLayout 
+    TextInput:
+        text:"informe o nome do equipamento"
+        height: "30px"
+        width: 350
+        top: 100
+        size_hint: None, None
+        pos_hint {center}
+    Button:
+        text:"Confirmar"
+        height: 30
+        top: 60
+        size_hint: None, None
+        pos_hint:{center}
