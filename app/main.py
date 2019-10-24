@@ -54,6 +54,8 @@ class MainApp(App):
         arquivo.close()
     def telaEquipamento(self):
         sm.current = 'equipamento'
+    def telaDespesa(self):
+        sm.current = 'despesas'
 
 
     def guardaDados(self,descricaoitem,valoritem,tempoUsoitem,vidaUtilItem):
