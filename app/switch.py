@@ -9,24 +9,21 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from equipamento import EquipamentoApp
 from main import LoginApp
 from home2 import MeuMenuApp
-from datetime import date 
+from despesas import despesasApp
 
 Builder.load_file('kv_modules/main_widget.kv')
 sm = ScreenManager()
 sm.add_widget(LoginApp(name='login'))
 sm.add_widget(MeuMenuApp(name='menu'))
 sm.add_widget(EquipamentoApp(name='equipamento'))
+sm.add_widget(DespesasApp(name='despesas'))
 
 if not os.path.exists('./dados.db'):
     conn = lite.connect('dados.db')
     cursor = conn.cursor()
     cursor.execute('''CREATE TABLE credencias('
         nome varchar(255) NOT NULL,
-        fazenda varchar(255) NOT NULL,
-        desc_item varchar(255) NOT NULL,
-        valor_item integer NOT NULL,
-        tempoUso integer  NOT NULL,
-        vidaUtil  NOT NULL,
+        fazenda varchar(255) NOT NULL
     )''')
 
 
@@ -52,6 +49,8 @@ class MainApp(App):
         arquivo.close()
     def telaEquipamento(self):
         sm.current = 'equipamento'
+    def telaDespesa(self):
+        sm.current = 'despesa'
 
 
     def guardaDados(self,descricaoitem,valoritem,TempoUsoitem,vidaUtilItem):
