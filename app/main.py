@@ -73,7 +73,12 @@ class MainApp(App):
         else:
             tempoUsoitem = float(tempoUsoitem)
         
-        self.valoratualItem = (tempoUsoitem*(valoritem/vidaUtilItem)-valoritem)
+        if not vidaUtilItem:
+            perdaAnual = 0
+        else:
+            perdaAnual = valoritem/vidaUtilItem
+        
+        self.valoratualItem = (tempoUsoitem*perdaAnual-valoritem)
 
     def voltamenu(self):
         sm.current = 'menu'
