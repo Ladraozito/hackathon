@@ -1,48 +1,49 @@
+#:kivy
 #:import get_color_from_hex kivy.utils.get_color_from_hex
-<EquipApp>
-    FloatLayout:
-        canvas.before: 
-        Image:
-            size_hint: .3, .2,
-            pos_hint: {"center_x": .5, "center_y": .75}
-            source: 'images/logo.png'
-        Label:
-            id: msg
-            size_hint: .7, .1
-            pos_hint: {"center_x": .5, "center_y": .55}
-        GridLayout:
-            cols: 1
-            spacing: 5
-            size_hint: .7, .37
-            pos_hint: {"center_x": .5, "center_y": .5}
 
+FloatLayout:
+    canvas.before: 
+    Image:
+        size_hint: .3, .2,
+        pos_hint: {"center_x": .5, "center_y": .75}
+        source: 'images/logo.png'
+    Label:
+        id: msg
+        size_hint: .7, .1
+        pos_hint: {"center_x": .5, "center_y": .55}
+    GridLayout:
+        cols: 1
+        spacing: 5
+        size_hint: .7, .37
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+        Label:
+            text: "Nome do proprietario:"
+            font_name: 'Roboto-BoldItalic'
+            size_hint_x: .6
+            text_size: self.size
+            halign: 'left'
+            valign: 'middle'
+            color: get_color_from_hex('#FFFFFF')
+            bold: True
+        TextInput:
+            id: nome
+            multiline: False
+        Label:
+            text: "Nome da fazenda:"
+            font_name: 'Roboto-BoldItalic'
+            size_hint_x: .6
+            text_size: self.size
+            halign: 'left'
+            valign: 'middle'
+            color: get_color_from_hex('#FFFFFF')
+            bold: True    
             Label:
-                text: "Nome do proprietario:"
-                font_name: 'Roboto-BoldItalic'
-                size_hint_x: .6
-                text_size: self.size
-                halign: 'left'
-                valign: 'middle'
-                color: get_color_from_hex('#FFFFFF')
-                bold: True
-            TextInput:
-                id: nome
-                multiline: False
-            Label:
-                text: "Nome da fazenda:"
-                font_name: 'Roboto-BoldItalic'
-                size_hint_x: .6
-                text_size: self.size
-                halign: 'left'
-                valign: 'middle'
-                color: get_color_from_hex('#FFFFFF')
-                bold: True    
-                Label:
-            TextInput:
-                id: fazenda
-                multiline: False
-            
-            Label:
-            Button:
-                size_hint: 2., 2.
-                text: "REGISTRAR-SE"
+        TextInput:
+            id: fazenda
+            multiline: False
+        
+        Label:
+        Button:
+            size_hint: 2., 2.
+            text: "REGISTRAR-SE"
