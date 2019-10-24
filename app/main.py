@@ -86,7 +86,6 @@ class MainApp(App):
     def voltamenu(self):
         sm.current = 'menu'
 
-        
 
 if __name__ == "__main__":
     sm.current = 'login'
