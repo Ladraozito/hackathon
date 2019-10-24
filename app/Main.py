@@ -58,6 +58,9 @@ class LoginApp(App):
     def build(self):
         main_widget = Builder.load_string(main_widget_kv)
         return main_widget
+    
+    def login(self):
+        print(self)
 
 
 LoginApp().run()
