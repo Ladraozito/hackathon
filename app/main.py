@@ -8,7 +8,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from equipamento import EquipamentoApp
 from login import LoginApp
 from home import MeuMenuApp
-from despesas import despesasApp 
+
 import os.path 
 import sqlite3 as lite
 from datetime import date 
@@ -18,7 +18,7 @@ sm = ScreenManager()
 sm.add_widget(LoginApp(name='login'))
 sm.add_widget(MeuMenuApp(name='menu'))
 sm.add_widget(EquipamentoApp(name='equipamento'))
-sm.add_widget(despesasApp(name='despesas'))
+
 
 if not os.path.exists('./dados.db'):
     conn = lite.connect('dados.db')
@@ -29,7 +29,7 @@ if not os.path.exists('./dados.db'):
         desc_item varchar(255) NOT NULL,
         valor_item integer NOT NULL,
         tempoUso integer  NOT NULL,
-        vidaUtil  NOT NULL,
+        vidaUtil integer NOT NULL,
     )''')
 
 
@@ -55,8 +55,7 @@ class MainApp(App):
         arquivo.close()
     def telaEquipamento(self):
         sm.current = 'equipamento'
-    def telaDespesa(self):
-        sm.current = 'despesas'
+     
 
 
     def guardaDados(self,descricaoitem,valoritem,tempoUsoitem,vidaUtilItem):
@@ -82,7 +81,20 @@ class MainApp(App):
             perdaAnual = valoritem/vidaUtilItem
         
         self.valoratualItem = (tempoUsoitem*perdaAnual-valoritem)
-
+        cursor.execute('''INSERT INTO credenciais (nome,fazenda,desc_item,valor_item,tempoUso,vidaUtil''')
+    def update_database(self):
+        cursor.execute("INSERT INTO credenciais(nome,fazenda,desc_item,valor_item,tempoUso,vidaUtil)\
+            VALUES(?, ?, ?, ?, ?, ?, ?)",
+                (str(self.nome.get()),
+                str(self.fazenda.get()),
+                str(self.desc_item.get()),
+                str(self.valor_item.get()),
+                str(self.tempoUso.get()),
+                str(self.valor_item.get()),
+                str(self.vidaUtil.get()),
+                )
+            )
+                       
     def voltamenu(self):
         sm.current = 'menu'
 
