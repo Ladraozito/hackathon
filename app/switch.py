@@ -24,6 +24,7 @@ if not os.path.exists('./dados.db'):
         fazenda varchar(255) NOT NULL
     )''')
 
+
 class MainApp(App):
     def build(self):
         return sm
@@ -45,10 +46,6 @@ class MainApp(App):
         arquivo.close()
     def telaEquipamento(self):
         sm.current = 'equipamento'
-
-
-   
-
 
 
 if __name__ == "__main__":

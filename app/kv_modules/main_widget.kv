@@ -15,10 +15,12 @@
             size_hint: .3, .2,
             pos_hint: {"center_x": .5, "center_y": .75}
             source: 'images/logo.png'
+
         Label:
             id: msg
             size_hint: .7, .1
             pos_hint: {"center_x": .5, "center_y": .55}
+
         GridLayout:
             cols: 1
             spacing: 5
@@ -34,9 +36,11 @@
                 valign: 'middle'
                 color: get_color_from_hex('#FFFFFF')
                 bold: True
+
             TextInput:
                 id: nome
                 multiline: False
+
             Label:
                 text: "Nome da fazenda:"
                 font_name: 'Roboto-BoldItalic'
@@ -45,7 +49,8 @@
                 halign: 'left'
                 valign: 'middle'
                 color: get_color_from_hex('#FFFFFF')
-                bold: True    
+                bold: True  
+
                 Label:
             TextInput:
                 id: fazenda
@@ -67,7 +72,6 @@
             background_normal: '' #alteramos as cores
             background_down: ''
             background_color: 0, 1, 0, 1
-            
             
             ActionView:         
                 use_separator: True #A actionview terá uma separação entre os objetos
@@ -149,7 +153,8 @@
             bold: True
             color: [0, 0, 1, 1]
             font_size: '30sp' 
-            pos_hint: {"center_x": .5, "center_y": .9}    
+            pos_hint: {"center_x": .5, "center_y": .9}   
+
         TextInput:
             hint_text:"Digite o nome do equipamento Ex:disco roçadeira"
             multiline: False
@@ -158,6 +163,7 @@
             top: 100
             size_hint: None, None
             pos_hint: {"center_x": .3, "center_y": .8}
+
         TextInput:
             hint_text:"Quanto pagou pelo equipamento? Ex:50"
             multiline: False
@@ -166,6 +172,7 @@
             top: 100
             size_hint: None, None
             pos_hint: {"center_x": .3, "center_y": .7}
+
         TextInput:
             hint_text:"Ah quantos anos voce possui este equipamento? Ex:5"
             multiline: False
@@ -174,6 +181,7 @@
             top: 100
             size_hint: None, None
             pos_hint: {"center_x": .3, "center_y": .6}
+
         TextInput:
             hint_text:"Qual o tempo de vida util deste equipemento? Ex: 10"
             multiline: False
