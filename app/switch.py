@@ -15,7 +15,11 @@ class MainApp(App):
     def login(self, nome, fazenda):
         self.nome = nome
         self.fazenda = fazenda
-        print(nome, fazenda)
+        with open('dados.txt', 'w', encoding='utf-8') as arquivo:
+            string = f'nome,{nome}\n'
+            string += f'fazenda,{fazenda}\n'
+            arquivo.write(string)
+
 
 if __name__ == "__main__":
     MainApp().run()
