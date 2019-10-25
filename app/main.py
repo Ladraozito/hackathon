@@ -14,6 +14,7 @@ import os.path
 import sqlite3 as lite
 from datetime import date
 
+
 class MainApp(App):
     def __init__(self):
         App.__init__(self)
@@ -49,13 +50,13 @@ class MainApp(App):
         return self.sm
 
     def printlog(self, message):
-        with open('./log.txt','a') as f: f.write(message+"\n")
+        with open('./log.txt', 'a') as f: f.write(message+"\n")
 
-    def salvaLogin(self,pnome,pfazenda):
+    def salvaLogin(self, pnome, pfazenda):
         self.printlog(pnome.text)
         self.printlog(pfazenda.text)
         cursor = self.conn.cursor()
-        cursor.execute('INSERT INTO cadastroInicio (nome, fazenda) VALUES (?, ?)',(pnome.text, pfazenda.text))
+        cursor.execute('INSERT INTO cadastroInicio (nome, fazenda) VALUES (?, ?)', (pnome.text, pfazenda.text))
         self.conn.commit()
         self.sm.current = 'menu'
 
@@ -79,10 +80,8 @@ class MainApp(App):
         self.sm.current = 'equipamento'
     def telaDespesas(self):
         self.sm.current = 'Despesas'
-     
 
-    
-    def guardaDados(self,descricaoitem,valoritem,tempoUsoitem,vidaUtilItem):
+    def guardaDados(self, descricaoitem, valoritem, tempoUsoitem, vidaUtilItem):
         if not valoritem:
             valoritem = 0.0
         else:
@@ -107,7 +106,8 @@ class MainApp(App):
         self.valoratualItem = (tempoUsoitem*perdaAnual-valoritem)
         cursor = self.conn.cursor()
         cursor.execute('''INSERT INTO equipamento (desc_item,valor_item,tempoUso,vidaUtil)
-            VALUES(?, ?, ?, ?)''',(descricaoitem,valoritem,tempoUsoitem,vidaUtilItem))               
+            VALUES(?, ?, ?, ?)''', (descricaoitem, valoritem, tempoUsoitem, vidaUtilItem))
+
     def voltamenu(self):
         self.sm.current = 'menu'
 
