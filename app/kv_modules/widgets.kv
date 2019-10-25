@@ -207,29 +207,24 @@
             TextInput:
                 hint_text: 'Selecione um mês'
                 multiline: False
-                id: descricao
+                id: mes
             
             TextInput:
-                hint_text:"Quanto pagou pelo equipamento? Ex:50"
+                hint_text:"Descrição do gasto"
                 multiline: False
-                id : valor
+                id: texto
+
+            TextInput:
+                hint_text:"Valor Gasto"
+                multiline: False
+                id : gastoMes
                 input_filter: 'float'
 
-            TextInput:
-                hint_text:"Ah quantos anos voce possui este equipamento? Ex:5"
-                multiline: False
-                id : TempoUso
-                input_filter: 'int'
-
-            TextInput:
-                hint_text:"Qual o tempo de vida util deste equipemento? Ex: 10"
-                multiline: False
-                id : vidaUtil
-                input_filter: 'int'
-                
             Button:
                 text:"INSERIR DADOS"
                 size_hint: 2., 2.
+                on_release: app.voltamenu()
+                on_release: root.limpar()
     BoxLayout:
         orientation: 'vertical'
         ActionBar:
