@@ -39,6 +39,11 @@ class MainApp(App):
                 desc_despesa varchar(255) NOT NULL,
                 valor_despesa float NOT NULL
             )''')
+            cursor.execute('''CREARE TABLE venda(
+                item_vendido varchar(255) NOT NULL,
+                quantidade_item integer, NOT NULL
+                preco_item float NOT NULL
+            ) ''')
         self.conn = lite.connect('./dados.db')
         cursor = self.conn.cursor()
         cursor.execute("SELECT * FROM cadastroInicio")
@@ -114,6 +119,10 @@ class MainApp(App):
     def despesas(self, dia_despesa, desc_despesa, valor_despesa ):
         cursor = self.conn.cursor()
         cursor.execute('INSERT INTO despesas (dia_despesa, desc_despesa, valor_despesa) VALUES (?, ?, ?)', (dia_despesa.text, desc_despesa.text, valor_despesa.text))
+        self.conn.commit()
+    def venda(self, item_vendido , quantidade_item, preco_item):
+        cursor = self.conn.cursor()
+        cursor.execute('INSERT INTO venda (item_vendido, quantidade_item, preco_item) VALUES (?, ?, ?)', (item_vendido.text, quantidade_item.text, preco_item.text))
         self.conn.commit()
     def voltamenu(self):
         self.sm.current = 'menu'
