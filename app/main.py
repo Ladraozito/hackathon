@@ -2,14 +2,12 @@ import kivy
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-
 from propriedade import PropriedadeApp
 from equipamento import EquipamentoApp
 from despesas import DespesasApp
 from home import MeuMenuApp
 from login import LoginApp
 from venda import VendaApp
-
 import os.path
 import sqlite3 as lite
 from datetime import date
@@ -43,7 +41,8 @@ class MainApp(App):
             cursor.execute('''CREATE TABLE despesas(
                 dia_despesa date NOT NULL,
                 desc_despesa varchar(255) NOT NULL,
-                valor_despesa float NOT NULL
+                valor_despesa float NOT NULL,
+                despesa_totalGASTO float NOT NULL
             )''')
             cursor.execute('''CREATE TABLE venda(
                 item_vendido varchar(255) NOT NULL,
@@ -144,6 +143,11 @@ class MainApp(App):
         cursor = self.conn.cursor()
         cursor.execute('INSERT INTO despesas (dia_despesa, desc_despesa, valor_despesa) VALUES (?, ?, ?)', (dia_despesa.text, desc_despesa.text, valor_despesa.text))
         self.conn.commit()
+        cursor = self.conn.cursor()
+        data_escolhida = '0'
+        cursor.execute("SELECT SUM(valor_despesa)  FROM despesas WHERE strftime('%m', dia_despesa ) = ? ",(data_escolhida))
+        DespesaDoMes= cursor.fetchall()
+        print(DespesaDoMes)
 
     def venda(self, item_vendido, quantidade_item, preco_item):
         cursor = self.conn.cursor()
@@ -162,3 +166,4 @@ class MainApp(App):
 if __name__ == "__main__":
     Builder.load_file('kv_modules/widgets.kv')
     MainApp().run()
+#
