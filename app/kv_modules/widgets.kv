@@ -185,8 +185,9 @@
             Button:
                 text:"INSERIR DADOS"
                 size_hint: 2., 2.
-                on_release: root.voltamenu()
+                on_release: root.limpar()
                 on_release: app.guardaDados(descricao.text,valor.text,TempoUso.text,vidaUtil.text)
+                on_release: app.voltamenu()
 
 <DespesasApp>
     FloatLayout:
@@ -209,7 +210,7 @@
                 bold: True 
 
             TextInput:
-                hint_text: 'Nome do Equpamento. Exemplo: Moto'
+                hint_text: 'Selecione um mês'
                 multiline: False
                 id: descricao
 

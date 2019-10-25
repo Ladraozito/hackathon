@@ -55,9 +55,8 @@ class MainApp(App):
 
     def telaEquipamento(self):
         sm.current = 'equipamento'
-     
 
-    
+
     def guardaDados(self,descricaoitem,valoritem,tempoUsoitem,vidaUtilItem):
         if not valoritem:
             valoritem = 0.0
