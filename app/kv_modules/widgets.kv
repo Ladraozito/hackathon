@@ -81,15 +81,11 @@
                 
                 ActionPrevious:
                     id: mostranome
-                    title: 'DEV_MAL' # Texto identificador do menu
+                    title: 'Tela Inicial' # Texto identificador do menu
                     with_previous: False
                     
                 ActionOverflow:
                 
-                ActionButton:    #aqui criamos um ícone a partir do atlas padrão do Kivy
-                    icon: 'atlas://data/images/defaulttheme/filechooser_file'
-                    on_press: print('DEVE IR PARA OUTRA TELA')  #quando pressionado vai mostrar isto na tela do terminal
-                        
                 ActionGroup:
                     text: 'CADASTRAR ' #criamos um grupo de botões debaixo do botão "Arquivo"
                     ActionButton:
@@ -99,7 +95,6 @@
                     ActionButton:
                         text: 'DESPESAS'
                         on_press: app.telaDespesas()
-                        
                         
                     ActionButton:
                         text: 'VENDA'
@@ -116,10 +111,7 @@
                         text: 'Observar desp.'
                     ActionButton:
                         text: 'Observar GERAL'
-                                
-            
-                            
-                            
+
                 ActionGroup:
                     text: 'Ajuda'
                     
@@ -127,14 +119,6 @@
                         text: 'Sobre'
                     ActionButton:
                         text: 'Ajuda'                  
-    
-                ActionToggleButton:
-                    text: 'Press. para alterar' #este botão mantém o ultimo estado (pressionado ou não)
-            
-                    
-                                    #aqui criamos uma classe que deriva do ActionItem
-                                    #(exigência do ActionView. Esta classe contem um
-                                    #label e um botão do tipo check
     
 <EquipamentoApp>
     FloatLayout:
@@ -186,6 +170,20 @@
                 on_release: app.guardaDados(descricao.text,valor.text,TempoUso.text,vidaUtil.text)
                 on_release: app.voltamenu()
 
+        BoxLayout:
+            orientation: 'vertical'
+            ActionBar:
+                id: actBar
+                pos_hint: {'top':1}  #na parte superior da tela
+                background_normal: '' #alteramos as cores
+                background_down: ''
+                background_color: 0, 1, 0, 1
+                ActionView:
+                    use_separator: True
+                    ActionPrevious:
+                        on_release: app.voltamenu()
+                        title: 'Equipamentos'
+
 <DespesasApp>
     FloatLayout:
         canvas.before:
@@ -193,13 +191,13 @@
                 pos: self.pos
                 size: self.size
                 source: 'images/background.jpg'
-        
+            
         GridLayout:
             cols: 1
             spacing: 5
             size_hint: .7, .37
             pos_hint: {'center_x': .5, 'center_y': .5}
-
+            
             Label:
                 text:'CUSTOS DE PRODUÇÃO'
                 size_hint_x: .6
@@ -210,7 +208,7 @@
                 hint_text: 'Selecione um mês'
                 multiline: False
                 id: descricao
-
+            
             TextInput:
                 hint_text:"Quanto pagou pelo equipamento? Ex:50"
                 multiline: False
@@ -232,6 +230,19 @@
             Button:
                 text:"INSERIR DADOS"
                 size_hint: 2., 2.
+    BoxLayout:
+        orientation: 'vertical'
+        ActionBar:
+            id: actBar
+            pos_hint: {'top':1}  #na parte superior da tela
+            background_normal: '' #alteramos as cores
+            background_down: ''
+            background_color: 0, 1, 0, 1
+            ActionView:
+                use_separator: True
+                ActionPrevious:
+                    on_release: app.voltamenu()
+                    title: 'Despesas'
 
 <Venda>
 <Propriedade>
