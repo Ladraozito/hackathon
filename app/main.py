@@ -22,7 +22,7 @@ class MainApp(App):
         self.sm.add_widget(LoginApp(name='login'))
         self.sm.add_widget(MeuMenuApp(name='menu'))
         self.sm.add_widget(EquipamentoApp(name='equipamento'))
-        self.sm.add_widget(DespesasApp(name='telaDespesas'))
+        self.sm.add_widget(DespesasApp(name='despesas'))
         if not os.path.exists('./dados.db'):
             self.conn = lite.connect('./dados.db')
             cursor = self.conn.cursor()
@@ -79,7 +79,7 @@ class MainApp(App):
     def telaEquipamento(self):
         self.sm.current = 'equipamento'
     def telaDespesas(self):
-        self.sm.current = 'Despesas'
+        self.sm.current = 'despesas'
 
     def guardaDados(self, descricaoitem, valoritem, tempoUsoitem, vidaUtilItem):
         if not valoritem:
