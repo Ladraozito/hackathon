@@ -4,6 +4,7 @@ from kivy.uix.widget import Widget
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
+
 from despesas import DespesasApp
 from equipamento import EquipamentoApp
 from login import LoginApp
@@ -11,9 +12,9 @@ from home import MeuMenuApp
 
 import os.path 
 import sqlite3 as lite
-from datetime import date 
-class MainApp(App):
+from datetime import date
 
+class MainApp(App):
     def __init__(self):
         App.__init__(self)
         self.sm = ScreenManager()
@@ -46,8 +47,10 @@ class MainApp(App):
 
     def build(self):
         return self.sm
+
     def printlog(self, message):
         with open('./log.txt','a') as f: f.write(message+"\n")
+
     def salvaLogin(self,pnome,pfazenda):
         self.printlog(pnome.text)
         self.printlog(pfazenda.text)
@@ -55,6 +58,7 @@ class MainApp(App):
         cursor.execute('INSERT INTO cadastroInicio (nome, fazenda) VALUES (?, ?)',(pnome.text, pfazenda.text))
         self.conn.commit()
         self.sm.current = 'menu'
+
     def login(self, nome, fazenda):
         self.nome = nome
         self.fazenda = fazenda
@@ -74,7 +78,7 @@ class MainApp(App):
     def telaEquipamento(self):
         self.sm.current = 'equipamento'
     def telaDespesas(self):
-        self.sm.current  'Despesas':
+        self.sm.current = 'Despesas'
      
 
     
