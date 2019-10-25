@@ -3,12 +3,12 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 
-from propriedade import Propriedades
+from propriedade import PropriedadeApp
 from equipamento import EquipamentoApp
 from despesas import DespesasApp
 from home import MeuMenuApp
 from login import LoginApp
-from venda import Vendas
+from venda import VendaApp
 
 import os.path
 import sqlite3 as lite
@@ -23,8 +23,8 @@ class MainApp(App):
         self.sm.add_widget(MeuMenuApp(name='menu'))
         self.sm.add_widget(EquipamentoApp(name='equipamento'))
         self.sm.add_widget(DespesasApp(name='despesas'))
-        self.sm.add_widget(Propriedades(name='propriedades'))
-        self.sm.add_widget(Vendas(name='vendas'))
+        self.sm.add_widget(PropriedadeApp(name='propriedade'))
+        self.sm.add_widget(VendaApp(name='vendas'))
 
         if not os.path.exists('./dados.db'):
             self.conn = lite.connect('./dados.db')
@@ -100,6 +100,12 @@ class MainApp(App):
     def telaDespesas(self):
         self.sm.current = 'despesas'
 
+    def telaPropriedade(self):
+        self.sm.current = 'propriedade'
+
+    def telaVenda(self):
+        self.sm.current = 'vendas'
+
     def guardaDados(self, descricaoitem, valoritem, tempoUsoitem, vidaUtilItem):
         if not valoritem:
             valoritem = 0.0
@@ -127,6 +133,7 @@ class MainApp(App):
         cursor.execute('''INSERT INTO equipamento (desc_item,valor_item,tempoUso,vidaUtil)
             VALUES(?, ?, ?, ?)''', (descricaoitem, valoritem, tempoUsoitem, vidaUtilItem))
         self.conn.commit()
+
     def despesas(self, dia_despesa, desc_despesa, valor_despesa ):
         cursor = self.conn.cursor()
         cursor.execute('INSERT INTO despesas (dia_despesa, desc_despesa, valor_despesa) VALUES (?, ?, ?)', (dia_despesa.text, desc_despesa.text, valor_despesa.text))
@@ -139,8 +146,11 @@ class MainApp(App):
         cursor = self.conn.cursor()
         cursor.execute('INSERT INTO propriedade (endereco, tamanhoFaz ,tamanhoLaminaDagua ,qtdTanques) VALUES (?, ?, ?, ?)', (endereco.text, tamanhoFaz.text ,tamanhoLaminaDagua.text ,qtdTanques.text))
         self.conn.commit()
+
     def voltamenu(self):
         self.sm.current = 'menu'
+
+
 if __name__ == "__main__":
     Builder.load_file('kv_modules/widgets.kv')
     MainApp().run()

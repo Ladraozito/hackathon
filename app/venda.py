@@ -1,5 +1,8 @@
 from kivy.uix.screenmanager import Screen
 
 
-class Vendas(Screen):
-    pass
+class VendaApp(Screen):
+    def limpar(self):
+        self.ids['descrevaVenda'].text = ''
+        self.ids['quantidadeVenda'].text = ''
+        self.ids['valorVenda'].text = ''
