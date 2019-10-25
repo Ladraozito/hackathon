@@ -230,6 +230,7 @@
             Button:
                 text:"INSERIR DADOS"
                 size_hint: 2., 2.
+                on_release: app.despesas(dia_despesa.text, desc_despesa.text,valor_despesa.text )
     BoxLayout:
         orientation: 'vertical'
         ActionBar:

@@ -34,9 +34,13 @@ class MainApp(App):
                 desc_item varchar(255) NOT NULL,
                 valor_item integer NOT NULL,
                 tempoUso integer  NOT NULL,
-                vidaUtil integer NOT NULL
+                vidaUtil integer NOT NULL,
             )''')
-        
+            cursor.execute('''CREATE TABLE despesas(
+                dia_despesa date NOT NULL,
+                desc_despesa varchar(255) NOT NULL ,
+                valor_despesa float NOT NULL,
+            )''')
         self.conn = lite.connect('./dados.db')
         cursor = self.conn.cursor()
         cursor.execute("SELECT * FROM cadastroInicio")
@@ -107,7 +111,11 @@ class MainApp(App):
         cursor = self.conn.cursor()
         cursor.execute('''INSERT INTO equipamento (desc_item,valor_item,tempoUso,vidaUtil)
             VALUES(?, ?, ?, ?)''', (descricaoitem, valoritem, tempoUsoitem, vidaUtilItem))
-
+        self.conn.commit()
+    def despesas(self, dia_despesa, desc_despesa, valor_despesa ):
+        cursor = self.conn.cursor()
+        cursor.execute('INSERT INTO despesas (dia_despesa, desc_despesa, valor_despesa) VALUES (?, ?, ?)', (dia_despesa, desc_despesa, valor_despesa))
+        self.conn.commit()
     def voltamenu(self):
         self.sm.current = 'menu'
 
