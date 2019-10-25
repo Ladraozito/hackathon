@@ -74,10 +74,8 @@ class MainApp(App):
     def telaEquipamento(self):
         self.sm.current = 'equipamento'
     def telaDespesas(self):
-        self.sm.current  'Despesas':
-     
-
-    
+        self.sm.current = 'despesas'
+         
     def guardaDados(self,descricaoitem,valoritem,tempoUsoitem,vidaUtilItem):
         if not valoritem:
             valoritem = 0.0
