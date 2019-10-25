@@ -37,16 +37,17 @@ class MainApp(App):
                 desc_item varchar(255) NOT NULL,
                 valor_item integer NOT NULL,
                 tempoUso integer  NOT NULL,
-                vidaUtil integer NOT NULL
+                vidaUtil integer NOT NULL,
+                 valorItemAtual integer NOT NULL
             )''')
             cursor.execute('''CREATE TABLE despesas(
                 dia_despesa date NOT NULL,
                 desc_despesa varchar(255) NOT NULL,
                 valor_despesa float NOT NULL
             )''')
-            cursor.execute('''CREARE TABLE venda(
+            cursor.execute('''CREATE TABLE venda(
                 item_vendido varchar(255) NOT NULL,
-                quantidade_item integer, NOT NULL
+                quantidade_item integer NOT NULL,
                 preco_item float NOT NULL
             ) ''')
             cursor.execute('''CREATE TABLE propriedade (
@@ -127,12 +128,17 @@ class MainApp(App):
             perdaAnual = 0
         else:
             perdaAnual = valoritem / vidaUtilItem
+            valorItemAtual = valoritem -(tempoUsoitem * perdaAnual) 
 
         self.valoratualItem = (tempoUsoitem * perdaAnual - valoritem)
         cursor = self.conn.cursor()
-        cursor.execute('''INSERT INTO equipamento (desc_item,valor_item,tempoUso,vidaUtil)
-            VALUES(?, ?, ?, ?)''', (descricaoitem, valoritem, tempoUsoitem, vidaUtilItem))
+        cursor.execute('''INSERT INTO equipamento (desc_item,valor_item,tempoUso,vidaUtil, valorItemAtual)
+            VALUES(?, ?, ?, ?, ?)''', (descricaoitem, valoritem, tempoUsoitem, vidaUtilItem, valorItemAtual))
         self.conn.commit()
+        cursor = self.conn.cursor()
+        cursor.execute("SELECT  valorItemAtual FROM equipamento ")
+        valorlidoteste = cursor.fetchall()
+        print(valorlidoteste)
 
     def despesas(self, dia_despesa, desc_despesa, valor_despesa ):
         cursor = self.conn.cursor()
@@ -142,7 +148,7 @@ class MainApp(App):
         cursor = self.conn.cursor()
         cursor.execute('INSERT INTO venda (item_vendido, quantidade_item, preco_item) VALUES (?, ?, ?)', (item_vendido.text, quantidade_item.text, preco_item.text))
         self.conn.commit()
-    def propriedade(self, endereco, tamanhoFaz ,tamanhoLaminaDagua ,qtdTanques)
+    def propriedade(self, endereco, tamanhoFaz ,tamanhoLaminaDagua ,qtdTanques):
         cursor = self.conn.cursor()
         cursor.execute('INSERT INTO propriedade (endereco, tamanhoFaz ,tamanhoLaminaDagua ,qtdTanques) VALUES (?, ?, ?, ?)', (endereco.text, tamanhoFaz.text ,tamanhoLaminaDagua.text ,qtdTanques.text))
         self.conn.commit()
