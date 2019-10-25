@@ -1,5 +1,5 @@
 from kivy.uix.screenmanager import Screen
 
 
-class LoginApp(Screen):
+class Vendas(Screen):
     pass

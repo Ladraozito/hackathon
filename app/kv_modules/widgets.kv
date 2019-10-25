@@ -247,6 +247,19 @@
                 pos: self.pos
                 size: self.size
                 source: 'images/background.jpg'
+    BoxLayout:
+        orientation: 'vertical'
+        ActionBar:
+            id: actBar
+            pos_hint: {'top':1}  #na parte superior da tela
+            background_normal: '' #alteramos as cores
+            background_down: ''
+            background_color: 0, 1, 0, 1
+            ActionView:
+                use_separator: True
+                ActionPrevious:
+                    on_release: app.voltamenu()
+                    title: 'Despesas'
 
 <Propriedade>
     FloatLayout:

@@ -3,10 +3,12 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 
-from despesas import DespesasApp
+from propriedade import Propriedades
 from equipamento import EquipamentoApp
-from login import LoginApp
+from despesas import DespesasApp
 from home import MeuMenuApp
+from login import LoginApp
+from venda import Vendas
 
 import os.path
 import sqlite3 as lite
@@ -21,6 +23,9 @@ class MainApp(App):
         self.sm.add_widget(MeuMenuApp(name='menu'))
         self.sm.add_widget(EquipamentoApp(name='equipamento'))
         self.sm.add_widget(DespesasApp(name='despesas'))
+        self.sm.add_widget(Propriedades(name='propriedades'))
+        self.sm.add_widget(Vendas(name='vendas'))
+
         if not os.path.exists('./dados.db'):
             self.conn = lite.connect('./dados.db')
             cursor = self.conn.cursor()
