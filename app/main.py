@@ -143,10 +143,15 @@ class MainApp(App):
         cursor = self.conn.cursor()
         cursor.execute('INSERT INTO despesas (dia_despesa, desc_despesa, valor_despesa) VALUES (?, ?, ?)', (dia_despesa.text, desc_despesa.text, valor_despesa.text))
         self.conn.commit()
+
     def venda(self, item_vendido , quantidade_item, preco_item):
         cursor = self.conn.cursor()
         cursor.execute('INSERT INTO venda (item_vendido, quantidade_item, preco_item) VALUES (?, ?, ?)', (item_vendido.text, quantidade_item.text, preco_item.text))
         self.conn.commit()
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7d5bacc22ef04bffe70f67346bfa536ba34b6c9d
     def propriedade(self, endereco, tamanhoFaz ,tamanhoLaminaDagua ,qtdTanques):
         cursor = self.conn.cursor()
         cursor.execute('INSERT INTO propriedade (endereco, tamanhoFaz ,tamanhoLaminaDagua ,qtdTanques) VALUES (?, ?, ?, ?)', (endereco.text, tamanhoFaz.text ,tamanhoLaminaDagua.text ,qtdTanques.text))
