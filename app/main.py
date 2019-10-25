@@ -74,7 +74,7 @@ class MainApp(App):
     def telaEquipamento(self):
         self.sm.current = 'equipamento'
     def telaDespesas(self):
-        self.sm.current = 'Despesas'
+        self.sm.current  'Despesas':
      
 
     
