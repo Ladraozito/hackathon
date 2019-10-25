@@ -49,6 +49,12 @@ class MainApp(App):
                 quantidade_item integer, NOT NULL
                 preco_item float NOT NULL
             ) ''')
+            cursor.execute('''CREATE TABLE propriedade (
+                endereco varchar(255)NOT NULL ,
+                tamanhoFaz float NOT NULL,
+                tamanhoLaminaDagua floatNOT NULL,
+                qtdTanques integer NOT NULL
+            )''')
         self.conn = lite.connect('./dados.db')
         cursor = self.conn.cursor()
         cursor.execute("SELECT * FROM cadastroInicio")
@@ -128,6 +134,10 @@ class MainApp(App):
     def venda(self, item_vendido , quantidade_item, preco_item):
         cursor = self.conn.cursor()
         cursor.execute('INSERT INTO venda (item_vendido, quantidade_item, preco_item) VALUES (?, ?, ?)', (item_vendido.text, quantidade_item.text, preco_item.text))
+        self.conn.commit()
+    def propriedade(self, endereco, tamanhoFaz ,tamanhoLaminaDagua ,qtdTanques)
+        cursor = self.conn.cursor()
+        cursor.execute('INSERT INTO propriedade (endereco, tamanhoFaz ,tamanhoLaminaDagua ,qtdTanques) VALUES (?, ?, ?, ?)', (endereco.text, tamanhoFaz.text ,tamanhoLaminaDagua.text ,qtdTanques.text))
         self.conn.commit()
     def voltamenu(self):
         self.sm.current = 'menu'
