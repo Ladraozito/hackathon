@@ -1,14 +1,15 @@
 import kivy
 from kivy.app import App
+from kivy.uix.widget import Widget
 from kivy.lang import Builder
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 from equipamento import EquipamentoApp
-from despesas import DespesasApp
-from home import MeuMenuApp
 from login import LoginApp
+from home import MeuMenuApp
 
-import os.path
+import os.path 
 import sqlite3 as lite
 from datetime import date 
 class MainApp(App):
@@ -41,33 +42,6 @@ class MainApp(App):
             self.sm.current = 'menu'
         else:
             self.sm.current = 'login'
-from datetime import date
-
-Builder.load_file('kv_modules/widgets.kv')
-sm = ScreenManager()
-sm.add_widget(LoginApp(name='login'))
-sm.add_widget(MeuMenuApp(name='menu'))
-sm.add_widget(EquipamentoApp(name='equipamento'))
-sm.add_widget(DespesasApp(name='despesas'))
-
-if not os.path.exists('./dados.db'):
-    conn = lite.connect('./dados.db')
-    cursor = conn.cursor()
-    cursor.execute('''
-        CREATE TABLE equipamento(
-        desc_item varchar(255) NOT NULL,
-        valor_item integer NOT NULL,
-        tempoUso integer  NOT NULL,
-        vidaUtil integer NOT NULL)
-        ''')
-
-conn = lite.connect('./dados.db')
-cursor = conn.cursor()
-
-
-class MainApp(App):
-    def build(self):
-        return sm
 
     def build(self):
         return self.sm
@@ -99,7 +73,9 @@ class MainApp(App):
     def telaEquipamento(self):
         self.sm.current = 'equipamento'
      
-   def guardaDados(self,descricaoitem,valoritem,tempoUsoitem,vidaUtilItem):
+
+    
+    def guardaDados(self,descricaoitem,valoritem,tempoUsoitem,vidaUtilItem):
         if not valoritem:
             valoritem = 0.0
         else:
@@ -122,7 +98,8 @@ class MainApp(App):
             perdaAnual = valoritem/vidaUtilItem
         
         self.valoratualItem = (tempoUsoitem*perdaAnual-valoritem)
-        self.cursor.execute('''INSERT INTO equipamento (desc_item,valor_item,tempoUso,vidaUtil)
+        cursor = self.conn.cursor()
+        cursor.execute('''INSERT INTO equipamento (desc_item,valor_item,tempoUso,vidaUtil)
             VALUES(?, ?, ?, ?)''',(descricaoitem,valoritem,tempoUsoitem,vidaUtilItem))               
     def voltamenu(self):
         self.sm.current = 'menu'
