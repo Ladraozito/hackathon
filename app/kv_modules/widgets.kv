@@ -240,4 +240,34 @@
                     title: 'Despesas'
 
 <Venda>
+    FloatLayout:
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.jpg'
+
 <Propriedade>
+    FloatLayout:
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.jpg'
+
+    GridLayout:
+        cols: 1
+        spacing: 5
+        size_hint: .7, .37
+        pos_hint: {'center_x': .5, 'center_y': .5}
+
+        Label:
+            text:'CUSTOS DE PRODUÇÃO'
+            size_hint_x: .6
+            color: get_color_from_hex('#FFFFFF')
+            bold: True
+
+        TextInput:
+            hint_text: 'Selecione um mês'
+            multiline: False
+            id: mes
