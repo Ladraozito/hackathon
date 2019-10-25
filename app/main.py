@@ -4,7 +4,7 @@ from kivy.uix.widget import Widget
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
-
+from despesas import DespesasApp
 from equipamento import EquipamentoApp
 from login import LoginApp
 from home import MeuMenuApp
@@ -20,6 +20,7 @@ class MainApp(App):
         self.sm.add_widget(LoginApp(name='login'))
         self.sm.add_widget(MeuMenuApp(name='menu'))
         self.sm.add_widget(EquipamentoApp(name='equipamento'))
+        self.sm.add_widget(DespesasApp(name='telaDespesas'))
         if not os.path.exists('./dados.db'):
             self.conn = lite.connect('./dados.db')
             cursor = self.conn.cursor()
@@ -72,6 +73,8 @@ class MainApp(App):
 
     def telaEquipamento(self):
         self.sm.current = 'equipamento'
+    def telaDespesas(self):
+        self.sm.current = 'Despesas'
      
 
     
