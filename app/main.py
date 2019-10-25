@@ -138,8 +138,7 @@ class MainApp(App):
         cursor = self.conn.cursor()
         cursor.execute("SELECT  valorItemAtual FROM equipamento ")
         valorlidoteste = cursor.fetchall()
-        print(valorlidoteste)
-
+        print(valorlidoteste) # CALCULA VALOR ATUAL DOS EQUIPAMENTOS
     def despesas(self, dia_despesa, desc_despesa, valor_despesa ):
         cursor = self.conn.cursor()
         cursor.execute('INSERT INTO despesas (dia_despesa, desc_despesa, valor_despesa) VALUES (?, ?, ?)', (dia_despesa.text, desc_despesa.text, valor_despesa.text))
