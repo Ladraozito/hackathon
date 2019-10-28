@@ -166,4 +166,3 @@ class MainApp(App):
 if __name__ == "__main__":
     Builder.load_file('kv_modules/widgets.kv')
     MainApp().run()
-#
