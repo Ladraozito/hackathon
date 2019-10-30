@@ -8,52 +8,7 @@ import os.path
 import sqlite3 as lite
 from datetime import date
 
-
-class Gerenciador(ScreenManager):
-    pass
-
-
-class Barra(BoxLayout):
-    pass
-
-
-class Login(Screen):
-    pass
-
-
-class Home(Screen):
-    def carregar_valoritem(self):
-        pass
-
-
-class Equipamento(Screen):
-    def limpar(self):
-        self.ids['descricao'].text = ''
-        self.ids['valor'].text = ''
-        self.ids['TempoUso'].text = ''
-        self.ids['vidaUtil'].text = ''
-
-
-class Despesas(Screen):
-    def limpar(self):
-        self.ids['mes'].text = ''
-        self.ids['texto'].text = ''
-        self.ids['gastoMes'].text = ''
-
-
-class Venda(Screen):
-    def limpar(self):
-        self.ids['descrevaVenda'].text = ''
-        self.ids['quantidadeVenda'].text = ''
-        self.ids['valorVenda'].text = ''
-
-
-class Propriedade(Screen):
-    def limpar(self):
-        self.ids['endereco'].text = ''
-        self.ids['tamanhoFazenda'].text = ''
-        self.ids['tamanhoDagua'].text = ''
-        self.ids['QtdTanques'].text = ''
+from widgets import *
 
 
 class Main(App):
