@@ -95,7 +95,7 @@ class Main(App):
         dados = cursor.fetchall()
         gerenciador = Gerenciador()
         if len(dados) > 0:
-            gerenciador.current = 'menu'
+            gerenciador.current = 'home'
         else:
             gerenciador.current = 'login'
         return gerenciador
@@ -109,7 +109,6 @@ class Main(App):
         cursor = self.conn.cursor()
         cursor.execute('INSERT INTO cadastroInicio (nome, fazenda) VALUES (?, ?)', (pnome.text, pfazenda.text))
         self.conn.commit()
-        self.current = 'menu'
 
     def login(self, nome, fazenda):
         self.nome = nome
@@ -148,7 +147,7 @@ class Main(App):
             perdaAnual = 0
         else:
             perdaAnual = valoritem / vidaUtilItem
-            valorItemAtual = valoritem -(tempoUsoitem * perdaAnual)
+        valorItemAtual = valoritem -(tempoUsoitem * perdaAnual)
 
         self.valoratualItem = (tempoUsoitem * perdaAnual - valoritem)
         cursor = self.conn.cursor()
@@ -162,11 +161,14 @@ class Main(App):
 
     def despesas(self, dia_despesa, desc_despesa, valor_despesa ):
         cursor = self.conn.cursor()
-        cursor.execute('INSERT INTO despesas (dia_despesa, desc_despesa, valor_despesa) VALUES (?, ?, ?)', (dia_despesa.text, desc_despesa.text, valor_despesa.text))
+        cursor.execute('''INSERT INTO despesas (dia_despesa, desc_despesa, valor_despesa, despesa_totalGASTO) 
+        VALUES (?, ?, ?, 0)''',
+        (dia_despesa.text, desc_despesa.text, valor_despesa.text))
         self.conn.commit()
         cursor = self.conn.cursor()
         data_escolhida = '0'
-        cursor.execute("SELECT SUM(valor_despesa)  FROM despesas WHERE strftime('%m', dia_despesa ) = ? ",(data_escolhida))
+        cursor.execute("SELECT SUM(valor_despesa)  FROM despesas WHERE strftime('%m', dia_despesa ) = ? ",
+        (data_escolhida))
         DespesaDoMes= cursor.fetchall()
         print(DespesaDoMes)
 

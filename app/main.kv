@@ -3,7 +3,7 @@
     Login:
         name: 'login'
     Home:
-        name: 'menu'
+        name: 'home'
     Equipamento:
         name: 'equipamento'
     Despesas:
@@ -12,21 +12,6 @@
         name: 'propriedade'
     Venda:
         name: 'venda'
-
-<Barra>:
-    BoxLayout:
-        orientation: 'vertical'
-        ActionBar:
-            id: actBar
-            pos_hint: {'top':1}  #na parte superior da tela
-            background_normal: '' #alteramos as cores
-            background_down: ''
-            background_color: 0, 1, 0, 1
-            ActionView:
-                use_separator: True
-                ActionPrevious:
-                    on_release: app.voltamenu()
-                    title: 'Equipamentos'
 
 <Login>:
     FloatLayout:
@@ -85,6 +70,7 @@
                 text: "REGISTRAR-SE"
                 size_hint: 2., 2.
                 on_release: app.salvaLogin(nome, fazenda)
+                on_release: app.root.current = 'home'
 <Home>:
     FloatLayout:
         canvas.before: 
@@ -193,7 +179,21 @@
                 size_hint: 2., 2.
                 on_release: root.limpar()
                 on_release: app.guardaDados(descricao.text,valor.text,TempoUso.text,vidaUtil.text)
-                on_release: app.voltamenu()
+                on_release: app.root.current = 'home'
+    BoxLayout:
+        orientation: 'vertical'
+        ActionBar:
+            id: actBar
+            pos_hint: {'top':1}  #na parte superior da tela
+            background_normal: '' #alteramos as cores
+            background_down: ''
+            background_color: 0, 1, 0, 1
+            ActionView:
+                use_separator: True
+                ActionPrevious:
+                    on_release: app.root.current = 'home'
+                    title: 'Equipamentos'
+
 
 <Despesas>:
     FloatLayout:
@@ -234,7 +234,7 @@
             Button:
                 text:"INSERIR DADOS"
                 size_hint: 2., 2.
-                on_release: app.voltamenu()
+                on_release: app.root.current = 'home'
                 on_release: root.limpar()
                 on_release: app.despesas(mes, texto, gastoMes)
     BoxLayout:
@@ -248,7 +248,7 @@
             ActionView:
                 use_separator: True
                 ActionPrevious:
-                    on_release: app.voltamenu()
+                    on_release: app.root.current = 'home'
                     title: 'Despesas'
 
 <Venda>:
@@ -290,7 +290,7 @@
             Button:
                 text:"INSERIR DADOS"
                 size_hint: 2., 2.
-                on_release: app.voltamenu()
+                on_release: app.root.current = 'home'
                 on_release: root.limpar()
 
     BoxLayout:
@@ -304,7 +304,7 @@
             ActionView:
                 use_separator: True
                 ActionPrevious:
-                    on_release: app.voltamenu()
+                    on_release: app.root.current = 'home'
                     title: 'Venda'
 
 <Propriedade>:
@@ -353,7 +353,7 @@
             Button:
                 text:"INSERIR DADOS"
                 size_hint: 2., 2.
-                on_release: app.voltamenu()
+                on_release: app.root.current = 'home'
                 on_release: root.limpar()
 
     BoxLayout:
@@ -367,5 +367,5 @@
             ActionView:
                 use_separator: True
                 ActionPrevious:
-                    on_release: app.voltamenu()
+                    on_release: app.root.current = 'home'
                     title: 'Propriedade'
