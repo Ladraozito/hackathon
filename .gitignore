@@ -109,3 +109,7 @@ venv.bak/
 # arquivos
 dados.*
 log.txt
+
+# buildozer
+app/.buildozer/
+app/bin/
