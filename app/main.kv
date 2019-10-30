@@ -1,9 +1,19 @@
 #:import get_color_from_hex kivy.utils.get_color_from_hex
-<MyCheckbox@BoxLayout+ActionItem>: # Esta é a forma de definirmos herança no .kv
-    ActionLabel:
-    ActionCheck:
+<Gerenciador>:
+    Login:
+        name: 'login'
+    Home:
+        name: 'home'
+    Equipamento:
+        name: 'equipamento'
+    Despesas:
+        name: 'despesa'
+    Propriedade:
+        name: 'propriedade'
+    Venda:
+        name: 'venda'
 
-<LoginApp>
+<Login>:
     FloatLayout:
         canvas.before: 
             Rectangle:
@@ -60,7 +70,8 @@
                 text: "REGISTRAR-SE"
                 size_hint: 2., 2.
                 on_release: app.salvaLogin(nome, fazenda)
-<MeuMenuApp>
+                on_release: app.root.current = 'home'
+<Home>:
     FloatLayout:
         canvas.before: 
             Rectangle:
@@ -69,40 +80,40 @@
                 source: 'images/background.jpg'
     BoxLayout:
         orientation: 'vertical'
-        ActionBar:               #definimos a ActionBAr
+        ActionBar:
             id: actBar
-            pos_hint: {'top':1}  #na parte superior da tela
-            background_normal: '' #alteramos as cores
+            pos_hint: {'top':1}
+            background_normal: ''
             background_down: ''
             background_color: 0, 1, 0, 1
             
             ActionView:         
-                use_separator: True #A actionview terá uma separação entre os objetos
+                use_separator: True
                 
                 ActionPrevious:
                     id: mostranome
-                    title: 'Tela Inicial' # Texto identificador do menu
+                    title: 'Tela Inicial'
                     with_previous: False
                     
                 ActionOverflow:
                 
                 ActionGroup:
-                    text: 'CADASTRAR ' #criamos um grupo de botões debaixo do botão "Arquivo"
+                    text: 'CADASTRAR '
                     ActionButton:
-                        text: 'EQUIPAMENTOS'            # é sempre o nome do botão _ ação a ser executada
-                        on_press: app.telaEquipamento()   
+                        text: 'EQUIPAMENTOS'
+                        on_press: app.root.current = 'equipamento'
                         
                     ActionButton:
                         text: 'DESPESAS'
-                        on_press: app.telaDespesas()
+                        on_press: app.root.current = 'despesa'
                         
                     ActionButton:
                         text: 'VENDA'
-                        on_press: app.telaVenda()
+                        on_press: app.root.current = 'venda'
                     
                     ActionButton:
                         text: 'PROPRIEDADE'
-                        on_press: app.telaPropriedade()
+                        on_press: app.root.current = 'propriedade'
                         
                 ActionGroup:
                     text: 'RELATORIOS'
@@ -120,7 +131,7 @@
                     ActionButton:
                         text: 'Ajuda'                  
     
-<EquipamentoApp>
+<Equipamento>:
     FloatLayout:
         canvas.before: 
             Rectangle:
@@ -168,23 +179,23 @@
                 size_hint: 2., 2.
                 on_release: root.limpar()
                 on_release: app.guardaDados(descricao.text,valor.text,TempoUso.text,vidaUtil.text)
-                on_release: app.voltamenu()
+                on_release: app.root.current = 'home'
+    BoxLayout:
+        orientation: 'vertical'
+        ActionBar:
+            id: actBar
+            pos_hint: {'top':1}  #na parte superior da tela
+            background_normal: '' #alteramos as cores
+            background_down: ''
+            background_color: 0, 1, 0, 1
+            ActionView:
+                use_separator: True
+                ActionPrevious:
+                    on_release: app.root.current = 'home'
+                    title: 'Equipamentos'
 
-        BoxLayout:
-            orientation: 'vertical'
-            ActionBar:
-                id: actBar
-                pos_hint: {'top':1}  #na parte superior da tela
-                background_normal: '' #alteramos as cores
-                background_down: ''
-                background_color: 0, 1, 0, 1
-                ActionView:
-                    use_separator: True
-                    ActionPrevious:
-                        on_release: app.voltamenu()
-                        title: 'Equipamentos'
 
-<DespesasApp>
+<Despesas>:
     FloatLayout:
         canvas.before:
             Rectangle:
@@ -223,7 +234,7 @@
             Button:
                 text:"INSERIR DADOS"
                 size_hint: 2., 2.
-                on_release: app.voltamenu()
+                on_release: app.root.current = 'home'
                 on_release: root.limpar()
                 on_release: app.despesas(mes, texto, gastoMes)
     BoxLayout:
@@ -237,10 +248,10 @@
             ActionView:
                 use_separator: True
                 ActionPrevious:
-                    on_release: app.voltamenu()
+                    on_release: app.root.current = 'home'
                     title: 'Despesas'
 
-<VendaApp>
+<Venda>:
     FloatLayout:
         canvas.before:
             Rectangle:
@@ -279,7 +290,7 @@
             Button:
                 text:"INSERIR DADOS"
                 size_hint: 2., 2.
-                on_release: app.voltamenu()
+                on_release: app.root.current = 'home'
                 on_release: root.limpar()
 
     BoxLayout:
@@ -293,10 +304,10 @@
             ActionView:
                 use_separator: True
                 ActionPrevious:
-                    on_release: app.voltamenu()
+                    on_release: app.root.current = 'home'
                     title: 'Venda'
 
-<PropriedadeApp>
+<Propriedade>:
     FloatLayout:
         canvas.before:
             Rectangle:
@@ -342,7 +353,7 @@
             Button:
                 text:"INSERIR DADOS"
                 size_hint: 2., 2.
-                on_release: app.voltamenu()
+                on_release: app.root.current = 'home'
                 on_release: root.limpar()
 
     BoxLayout:
@@ -356,5 +367,5 @@
             ActionView:
                 use_separator: True
                 ActionPrevious:
-                    on_release: app.voltamenu()
+                    on_release: app.root.current = 'home'
                     title: 'Propriedade'

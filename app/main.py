@@ -2,28 +2,17 @@ import kivy
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-from propriedade import PropriedadeApp
-from equipamento import EquipamentoApp
-from despesas import DespesasApp
-from home import MeuMenuApp
-from login import LoginApp
-from venda import VendaApp
+from kivy.uix.boxlayout import BoxLayout
+
 import os.path
 import sqlite3 as lite
 from datetime import date
 
+from widgets import *
 
-class MainApp(App):
-    def __init__(self):
-        App.__init__(self)
-        self.sm = ScreenManager()
-        self.sm.add_widget(LoginApp(name='login'))
-        self.sm.add_widget(MeuMenuApp(name='menu'))
-        self.sm.add_widget(EquipamentoApp(name='equipamento'))
-        self.sm.add_widget(DespesasApp(name='despesas'))
-        self.sm.add_widget(PropriedadeApp(name='propriedade'))
-        self.sm.add_widget(VendaApp(name='vendas'))
 
+class Main(App):
+    def build(self):
         if not os.path.exists('./dados.db'):
             self.conn = lite.connect('./dados.db')
             cursor = self.conn.cursor()
@@ -59,13 +48,12 @@ class MainApp(App):
         cursor = self.conn.cursor()
         cursor.execute("SELECT * FROM cadastroInicio")
         dados = cursor.fetchall()
+        gerenciador = Gerenciador()
         if len(dados) > 0:
-            self.sm.current = 'menu'
+            gerenciador.current = 'home'
         else:
-            self.sm.current = 'login'
-
-    def build(self):
-        return self.sm
+            gerenciador.current = 'login'
+        return gerenciador
 
     def printlog(self, message):
         with open('./log.txt', 'a') as f: f.write(message + "\n")
@@ -76,7 +64,6 @@ class MainApp(App):
         cursor = self.conn.cursor()
         cursor.execute('INSERT INTO cadastroInicio (nome, fazenda) VALUES (?, ?)', (pnome.text, pfazenda.text))
         self.conn.commit()
-        self.sm.current = 'menu'
 
     def login(self, nome, fazenda):
         self.nome = nome
@@ -93,18 +80,6 @@ class MainApp(App):
         self.nome = dados[0].split(',')[1]
         self.fazenda = dados[1].split(',')[1]
         arquivo.close()
-
-    def telaEquipamento(self):
-        self.sm.current = 'equipamento'
-
-    def telaDespesas(self):
-        self.sm.current = 'despesas'
-
-    def telaPropriedade(self):
-        self.sm.current = 'propriedade'
-
-    def telaVenda(self):
-        self.sm.current = 'vendas'
 
     def guardaDados(self, descricaoitem, valoritem, tempoUsoitem, vidaUtilItem):
         if not valoritem:
@@ -127,7 +102,7 @@ class MainApp(App):
             perdaAnual = 0
         else:
             perdaAnual = valoritem / vidaUtilItem
-            valorItemAtual = valoritem -(tempoUsoitem * perdaAnual) 
+        valorItemAtual = valoritem -(tempoUsoitem * perdaAnual)
 
         self.valoratualItem = (tempoUsoitem * perdaAnual - valoritem)
         cursor = self.conn.cursor()
@@ -141,11 +116,14 @@ class MainApp(App):
 
     def despesas(self, dia_despesa, desc_despesa, valor_despesa ):
         cursor = self.conn.cursor()
-        cursor.execute('INSERT INTO despesas (dia_despesa, desc_despesa, valor_despesa) VALUES (?, ?, ?)', (dia_despesa.text, desc_despesa.text, valor_despesa.text))
+        cursor.execute('''INSERT INTO despesas (dia_despesa, desc_despesa, valor_despesa, despesa_totalGASTO) 
+        VALUES (?, ?, ?, 0)''',
+        (dia_despesa.text, desc_despesa.text, valor_despesa.text))
         self.conn.commit()
         cursor = self.conn.cursor()
         data_escolhida = '0'
-        cursor.execute("SELECT SUM(valor_despesa)  FROM despesas WHERE strftime('%m', dia_despesa ) = ? ",(data_escolhida))
+        cursor.execute("SELECT SUM(valor_despesa)  FROM despesas WHERE strftime('%m', dia_despesa ) = ? ",
+        (data_escolhida))
         DespesaDoMes= cursor.fetchall()
         print(DespesaDoMes)
 
@@ -159,10 +137,6 @@ class MainApp(App):
         cursor.execute('INSERT INTO propriedade (endereco, tamanhoFaz ,tamanhoLaminaDagua ,qtdTanques) VALUES (?, ?, ?, ?)', (endereco.text, tamanhoFaz.text ,tamanhoLaminaDagua.text ,qtdTanques.text))
         self.conn.commit()
 
-    def voltamenu(self):
-        self.sm.current = 'menu'
-
 
 if __name__ == "__main__":
-    Builder.load_file('kv_modules/widgets.kv')
-    MainApp().run()
+    Main().run()
