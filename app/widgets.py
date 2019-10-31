@@ -8,10 +8,6 @@ class Gerenciador(ScreenManager):
     pass
 
 
-class Barra(BoxLayout):
-    pass
-
-
 class Login(Screen):
     pass
 

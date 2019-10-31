@@ -20,6 +20,7 @@ class Main(App):
                 nome varchar(255) NOT NULL,
                 fazenda varchar(255) NOT NULL
                 )''')
+
             cursor.execute('''CREATE TABLE equipamento(
                 desc_item varchar(255) NOT NULL,
                 valor_item integer NOT NULL,
@@ -27,23 +28,27 @@ class Main(App):
                 vidaUtil integer NOT NULL,
                  valorItemAtual integer NOT NULL
             )''')
+
             cursor.execute('''CREATE TABLE despesas(
                 dia_despesa date NOT NULL,
                 desc_despesa varchar(255) NOT NULL,
                 valor_despesa float NOT NULL,
                 despesa_totalGASTO float NOT NULL
             )''')
+
             cursor.execute('''CREATE TABLE venda(
                 item_vendido varchar(255) NOT NULL,
                 quantidade_item integer NOT NULL,
                 preco_item float NOT NULL
             ) ''')
+
             cursor.execute('''CREATE TABLE propriedade (
                 endereco varchar(255)NOT NULL ,
                 tamanhoFaz float NOT NULL,
                 tamanhoLaminaDagua floatNOT NULL,
                 qtdTanques integer NOT NULL
             )''')
+
         self.conn = lite.connect('./dados.db')
         cursor = self.conn.cursor()
         cursor.execute("SELECT * FROM cadastroInicio")
@@ -56,7 +61,8 @@ class Main(App):
         return gerenciador
 
     def printlog(self, message):
-        with open('./log.txt', 'a') as f: f.write(message + "\n")
+        with open('./log.txt', 'a') as f:
+            f.write(message + "\n")
 
     def salvaLogin(self, pnome, pfazenda):
         self.printlog(pnome.text)
@@ -73,13 +79,6 @@ class Main(App):
             string += f'fazenda,{fazenda}\n'
             arquivo.write(string)
         self.sm.current = 'menu'
-
-    def verificar(self):
-        arquivo = open('dados.txt', 'r', encoding="utf-8")
-        dados = arquivo.readlines()
-        self.nome = dados[0].split(',')[1]
-        self.fazenda = dados[1].split(',')[1]
-        arquivo.close()
 
     def guardaDados(self, descricaoitem, valoritem, tempoUsoitem, vidaUtilItem):
         if not valoritem:
@@ -102,7 +101,7 @@ class Main(App):
             perdaAnual = 0
         else:
             perdaAnual = valoritem / vidaUtilItem
-        valorItemAtual = valoritem -(tempoUsoitem * perdaAnual)
+        valorItemAtual = valoritem - (tempoUsoitem * perdaAnual)
 
         self.valoratualItem = (tempoUsoitem * perdaAnual - valoritem)
         cursor = self.conn.cursor()
@@ -114,27 +113,34 @@ class Main(App):
         valorlidoteste = cursor.fetchall()
         print(valorlidoteste)  # CALCULA VALOR ATUAL DOS EQUIPAMENTOS
 
-    def despesas(self, dia_despesa, desc_despesa, valor_despesa ):
+    def despesas(self, dia_despesa, desc_despesa, valor_despesa):
         cursor = self.conn.cursor()
-        cursor.execute('''INSERT INTO despesas (dia_despesa, desc_despesa, valor_despesa, despesa_totalGASTO) 
-        VALUES (?, ?, ?, 0)''',
-        (dia_despesa.text, desc_despesa.text, valor_despesa.text))
+        cursor.execute('''INSERT INTO despesas (dia_despesa, 
+                                                desc_despesa, 
+                                                valor_despesa, 
+                                                despesa_totalGASTO) 
+                                                VALUES (?, ?, ?, 0)''',
+                       (dia_despesa.text, desc_despesa.text, valor_despesa.text))
         self.conn.commit()
+
         cursor = self.conn.cursor()
         data_escolhida = '0'
-        cursor.execute("SELECT SUM(valor_despesa)  FROM despesas WHERE strftime('%m', dia_despesa ) = ? ",
-        (data_escolhida))
-        DespesaDoMes= cursor.fetchall()
+        cursor.execute("SELECT SUM(valor_despesa) FROM despesas WHERE strftime('%m', dia_despesa ) = ? ",
+                       data_escolhida)
+        DespesaDoMes = cursor.fetchall()
         print(DespesaDoMes)
 
     def venda(self, item_vendido, quantidade_item, preco_item):
         cursor = self.conn.cursor()
-        cursor.execute('INSERT INTO venda (item_vendido, quantidade_item, preco_item) VALUES (?, ?, ?)', (item_vendido.text, quantidade_item.text, preco_item.text))
+        cursor.execute('INSERT INTO venda (item_vendido, quantidade_item, preco_item) VALUES (?, ?, ?)',
+                       (item_vendido.text, quantidade_item.text, preco_item.text))
         self.conn.commit()
 
     def propriedade(self, endereco, tamanhoFaz, tamanhoLaminaDagua, qtdTanques):
         cursor = self.conn.cursor()
-        cursor.execute('INSERT INTO propriedade (endereco, tamanhoFaz ,tamanhoLaminaDagua ,qtdTanques) VALUES (?, ?, ?, ?)', (endereco.text, tamanhoFaz.text ,tamanhoLaminaDagua.text ,qtdTanques.text))
+        cursor.execute(
+            'INSERT INTO propriedade (endereco, tamanhoFaz ,tamanhoLaminaDagua ,qtdTanques) VALUES (?, ?, ?, ?)',
+            (endereco.text, tamanhoFaz.text, tamanhoLaminaDagua.text, qtdTanques.text))
         self.conn.commit()
 
 
