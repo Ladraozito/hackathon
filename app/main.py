@@ -8,6 +8,7 @@ from despesas import DespesasApp
 from home import MeuMenuApp
 from login import LoginApp
 from venda import VendaApp
+from relatorioGERAL import RelatorioApp 
 import os.path
 import sqlite3 as lite
 from datetime import date
@@ -23,7 +24,7 @@ class MainApp(App):
         self.sm.add_widget(DespesasApp(name='despesas'))
         self.sm.add_widget(PropriedadeApp(name='propriedade'))
         self.sm.add_widget(VendaApp(name='vendas'))
-
+        self.sm.add_widget(RelatorioApp(name='relatorioGERAL'))
         if not os.path.exists('./dados.db'):
             self.conn = lite.connect('./dados.db')
             cursor = self.conn.cursor()
@@ -102,9 +103,10 @@ class MainApp(App):
 
     def telaPropriedade(self):
         self.sm.current = 'propriedade'
-
     def telaVenda(self):
         self.sm.current = 'vendas'
+    def telaRelatorioGERAL(self):
+        self.sm.current = 'relatorioGERAL'
 
     def guardaDados(self, descricaoitem, valoritem, tempoUsoitem, vidaUtilItem):
         if not valoritem:
@@ -137,7 +139,6 @@ class MainApp(App):
         cursor = self.conn.cursor()
         cursor.execute("SELECT  valorItemAtual FROM equipamento ")
         valorlidoteste = cursor.fetchall()
-        print(valorlidoteste) # CALCULA VALOR ATUAL DOS EQUIPAMENTOS
     def despesas(self, dia_despesa, desc_despesa, valor_despesa ):
         cursor = self.conn.cursor()
         cursor.execute('INSERT INTO despesas (dia_despesa, desc_despesa, valor_despesa) VALUES (?, ?, ?)', (dia_despesa.text, desc_despesa.text, valor_despesa.text))
@@ -164,4 +165,3 @@ class MainApp(App):
 if __name__ == "__main__":
     Builder.load_file('kv_modules/widgets.kv')
     MainApp().run()
-#

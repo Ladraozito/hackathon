@@ -108,9 +108,10 @@
                     text: 'RELATORIOS'
                     
                     ActionButton:
-                        text: 'Observar desp.'
+                        text: 'DESPESAS'
                     ActionButton:
-                        text: 'Observar GERAL'
+                        text: 'GERAL'
+                        on_release: app.telaRelatorioGERAL()
 
                 ActionGroup:
                     text: 'Ajuda'
@@ -205,7 +206,7 @@
                 bold: True 
 
             TextInput:
-                hint_text: '2019-10-15'
+                hint_text: 'Ex:2019-10-15'
                 multiline: False
                 id: mes
             
@@ -358,3 +359,34 @@
                 ActionPrevious:
                     on_release: app.voltamenu()
                     title: 'Propriedade'
+<RelatorioApp>
+    FloatLayout:
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.jpg'
+        GridLayout:
+            cols: 1
+            spacing: 5
+            size_hint: .7, .37
+            pos_hint: {'center_x': .5, 'center_y': .5}
+
+            Label:
+                text:'AQUI ESTAO TODAS SUAS INFORMACOES IMPORTANTES'
+                size_hint_x: .9
+                color: get_color_from_hex('#FFFFFF')
+                bold: True
+
+            Label:
+                text: 'Despesas TOTAIS'
+                font_name: 'Roboto-BoldItalic'
+                size_hint_x: .6
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+                color: get_color_from_hex('#FFFFFF')
+                bold: True
+            TextInput:
+                hint_text: ''
+                id: gastosTOTAIS
