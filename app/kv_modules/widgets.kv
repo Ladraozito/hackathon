@@ -1,19 +1,9 @@
 #:import get_color_from_hex kivy.utils.get_color_from_hex
-<Gerenciador>:
-    Login:
-        name: 'login'
-    Home:
-        name: 'home'
-    Equipamento:
-        name: 'equipamento'
-    Despesas:
-        name: 'despesa'
-    Propriedade:
-        name: 'propriedade'
-    Venda:
-        name: 'venda'
+<MyCheckbox@BoxLayout+ActionItem>: # Esta é a forma de definirmos herança no .kv
+    ActionLabel:
+    ActionCheck:
 
-<Login>:
+<LoginApp>
     FloatLayout:
         canvas.before: 
             Rectangle:
@@ -24,7 +14,7 @@
         Image:
             size_hint: .3, .2,
             pos_hint: {"center_x": .5, "center_y": .75}
-            source: 'images/icone.png'
+            source: 'images/logo.png'
 
         Label:
             id: msg
@@ -34,11 +24,11 @@
         GridLayout:
             cols: 1
             spacing: 5
-            size_hint: .9, .4
+            size_hint: .7, .37
             pos_hint: {"center_x": .5, "center_y": .5}
 
             Label:
-                text: 'Nome do Proprietario'
+                text: 'Nome Proprietario'
                 font_name: 'Roboto-BoldItalic'
                 size_hint_x: .6
                 text_size: self.size
@@ -70,8 +60,7 @@
                 text: "REGISTRAR-SE"
                 size_hint: 2., 2.
                 on_release: app.salvaLogin(nome, fazenda)
-                on_release: app.root.current = 'home'
-<Home>:
+<MeuMenuApp>
     FloatLayout:
         canvas.before: 
             Rectangle:
@@ -80,45 +69,44 @@
                 source: 'images/background.jpg'
     BoxLayout:
         orientation: 'vertical'
-        ActionBar:
+        ActionBar:               #definimos a ActionBAr
             id: actBar
-            pos_hint: {'top':1}
-            background_normal: ''
+            pos_hint: {'top':1}  #na parte superior da tela
+            background_normal: '' #alteramos as cores
             background_down: ''
             background_color: 0, 1, 0, 1
-
-            ActionView:
-                use_separator: True
+            
+            ActionView:         
+                use_separator: True #A actionview terá uma separação entre os objetos
+                
                 ActionPrevious:
-                    app_icon_width: 0
-                    app_icon_height: 0
                     id: mostranome
-                    title: 'Tela Inicial'
+                    title: 'Tela Inicial' # Texto identificador do menu
                     with_previous: False
-
+                    
                 ActionOverflow:
                 
                 ActionGroup:
-                    text: 'CADASTRAR '
+                    text: 'CADASTRAR ' #criamos um grupo de botões debaixo do botão "Arquivo"
                     ActionButton:
-                        text: 'EQUIPAMENTOS'
-                        on_press: app.root.current = 'equipamento'
-
+                        text: 'EQUIPAMENTOS'            # é sempre o nome do botão _ ação a ser executada
+                        on_press: app.telaEquipamento()   
+                        
                     ActionButton:
                         text: 'DESPESAS'
-                        on_press: app.root.current = 'despesa'
-
+                        on_press: app.telaDespesas()
+                        
                     ActionButton:
                         text: 'VENDA'
-                        on_press: app.root.current = 'venda'
-
+                        on_press: app.telaVenda()
+                    
                     ActionButton:
                         text: 'PROPRIEDADE'
-                        on_press: app.root.current = 'propriedade'
-
+                        on_press: app.telaPropriedade()
+                        
                 ActionGroup:
                     text: 'RELATORIOS'
-
+                    
                     ActionButton:
                         text: 'DESPESAS'
                     ActionButton:
@@ -127,13 +115,13 @@
 
                 ActionGroup:
                     text: 'Ajuda'
-
+                    
                     ActionButton:
                         text: 'Sobre'
                     ActionButton:
-                        text: 'Ajuda'
-
-<Equipamento>:
+                        text: 'Ajuda'                  
+    
+<EquipamentoApp>
     FloatLayout:
         canvas.before: 
             Rectangle:
@@ -143,8 +131,8 @@
         
         GridLayout:
             cols: 1
-            spacing: 20
-            size_hint: .9, .4
+            spacing: 5
+            size_hint: .7, .37
             pos_hint: {'center_x': .5, 'center_y': .5}
 
             Label:
@@ -154,24 +142,24 @@
                 bold: True 
 
             TextInput:
-                hint_text: 'Nome do Equipamento'
+                hint_text: 'Nome do Equipamento. Exemplo: Moto'
                 multiline: False
                 id: descricao
 
             TextInput:
-                hint_text:"Valor do equipamento R$"
+                hint_text:"Quanto pagou pelo equipamento? Ex:50"
                 multiline: False
                 id : valor
                 input_filter: 'float'
 
             TextInput:
-                hint_text:"Anos de posse do equipamento"
+                hint_text:"Ah quantos anos voce possui este equipamento? Ex:5"
                 multiline: False
                 id : TempoUso
                 input_filter: 'int'
 
             TextInput:
-                hint_text:"Vida util do equipamento"
+                hint_text:"Qual o tempo de vida util deste equipemento? Ex: 10"
                 multiline: False
                 id : vidaUtil
                 input_filter: 'int'
@@ -181,23 +169,23 @@
                 size_hint: 2., 2.
                 on_release: root.limpar()
                 on_release: app.guardaDados(descricao.text,valor.text,TempoUso.text,vidaUtil.text)
-                on_release: app.root.current = 'home'
-    BoxLayout:
-        orientation: 'vertical'
-        ActionBar:
-            id: actBar
-            pos_hint: {'top':1}  #na parte superior da tela
-            background_normal: '' #alteramos as cores
-            background_down: ''
-            background_color: 0, 1, 0, 1
-            ActionView:
-                use_separator: True
-                ActionPrevious:
-                    on_release: app.root.current = 'home'
-                    title: 'Equipamentos'
+                on_release: app.voltamenu()
 
+        BoxLayout:
+            orientation: 'vertical'
+            ActionBar:
+                id: actBar
+                pos_hint: {'top':1}  #na parte superior da tela
+                background_normal: '' #alteramos as cores
+                background_down: ''
+                background_color: 0, 1, 0, 1
+                ActionView:
+                    use_separator: True
+                    ActionPrevious:
+                        on_release: app.voltamenu()
+                        title: 'Equipamentos'
 
-<Despesas>:
+<DespesasApp>
     FloatLayout:
         canvas.before:
             Rectangle:
@@ -207,8 +195,8 @@
             
         GridLayout:
             cols: 1
-            spacing: 20
-            size_hint: .9, .4
+            spacing: 5
+            size_hint: .7, .37
             pos_hint: {'center_x': .5, 'center_y': .5}
             
             Label:
@@ -236,7 +224,7 @@
             Button:
                 text:"INSERIR DADOS"
                 size_hint: 2., 2.
-                on_release: app.root.current = 'home'
+                on_release: app.voltamenu()
                 on_release: root.limpar()
                 on_release: app.despesas(mes, texto, gastoMes)
     BoxLayout:
@@ -250,10 +238,10 @@
             ActionView:
                 use_separator: True
                 ActionPrevious:
-                    on_release: app.root.current = 'home'
+                    on_release: app.voltamenu()
                     title: 'Despesas'
 
-<Venda>:
+<VendaApp>
     FloatLayout:
         canvas.before:
             Rectangle:
@@ -262,8 +250,8 @@
                 source: 'images/background.jpg'
         GridLayout:
             cols: 1
-            spacing: 20
-            size_hint: .9, .4
+            spacing: 5
+            size_hint: .7, .37
             pos_hint: {'center_x': .5, 'center_y': .5}
 
             Label:
@@ -292,7 +280,7 @@
             Button:
                 text:"INSERIR DADOS"
                 size_hint: 2., 2.
-                on_release: app.root.current = 'home'
+                on_release: app.voltamenu()
                 on_release: root.limpar()
 
     BoxLayout:
@@ -306,10 +294,10 @@
             ActionView:
                 use_separator: True
                 ActionPrevious:
-                    on_release: app.root.current = 'home'
+                    on_release: app.voltamenu()
                     title: 'Venda'
 
-<Propriedade>:
+<PropriedadeApp>
     FloatLayout:
         canvas.before:
             Rectangle:
@@ -319,8 +307,8 @@
 
         GridLayout:
             cols: 1
-            spacing: 20
-            size_hint: .9, .4
+            spacing: 5
+            size_hint: .7, .37
             pos_hint: {'center_x': .5, 'center_y': .5}
 
             Label:
@@ -341,7 +329,7 @@
                 input_filter: 'float'
 
             TextInput:
-                hint_text: 'Tamanho da Lamina D\'agua'
+                hint_text: 'tamanho da Lamina Dagua'
                 multiline: False
                 id: tamanhoDagua
                 input_filter: 'float'
@@ -355,7 +343,7 @@
             Button:
                 text:"INSERIR DADOS"
                 size_hint: 2., 2.
-                on_release: app.root.current = 'home'
+                on_release: app.voltamenu()
                 on_release: root.limpar()
 
     BoxLayout:
@@ -369,7 +357,7 @@
             ActionView:
                 use_separator: True
                 ActionPrevious:
-                    on_release: app.root.current = 'home'
+                    on_release: app.voltamenu()
                     title: 'Propriedade'
 <RelatorioApp>
     FloatLayout:
