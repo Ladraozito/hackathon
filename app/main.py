@@ -71,15 +71,6 @@ class Main(App):
         cursor.execute('INSERT INTO cadastroInicio (nome, fazenda) VALUES (?, ?)', (pnome.text, pfazenda.text))
         self.conn.commit()
 
-    def login(self, nome, fazenda):
-        self.nome = nome
-        self.fazenda = fazenda
-        with open('dados.txt', 'w', encoding='utf-8') as arquivo:
-            string = f'nome,{nome}\n'
-            string += f'fazenda,{fazenda}\n'
-            arquivo.write(string)
-        self.sm.current = 'menu'
-
     def guardaDados(self, descricaoitem, valoritem, tempoUsoitem, vidaUtilItem):
         if not valoritem:
             valoritem = 0.0
