@@ -1,0 +1,404 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+<Gerenciador>:
+    Login:
+        name: 'login'
+    Home:
+        name: 'home'
+    Equipamento:
+        name: 'equipamento'
+    Despesas:
+        name: 'despesa'
+    Propriedade:
+        name: 'propriedade'
+    Venda:
+        name: 'venda'
+
+<Login>:
+    FloatLayout:
+        canvas.before: 
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.jpg'
+
+        Image:
+            size_hint: .3, .2,
+            pos_hint: {"center_x": .5, "center_y": .75}
+            source: 'images/icone.png'
+
+        Label:
+            id: msg
+            size_hint: .7, .1
+            pos_hint: {"center_x": .5, "center_y": .55}
+
+        GridLayout:
+            cols: 1
+            spacing: 5
+            size_hint: .9, .4
+            pos_hint: {"center_x": .5, "center_y": .5}
+
+            Label:
+                text: 'Nome do Proprietario'
+                font_name: 'Roboto-BoldItalic'
+                size_hint_x: .6
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+                color: get_color_from_hex('#FFFFFF')
+                bold: True
+
+            TextInput:
+                id: nome
+                multiline: False
+
+            Label:
+                text: "Nome da fazenda:"
+                font_name: 'Roboto-BoldItalic'
+                size_hint_x: .6
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+                color: get_color_from_hex('#FFFFFF')
+                bold: True  
+
+            TextInput:
+                id: fazenda
+                multiline: False
+            
+            Label:
+            Button:
+                text: "REGISTRAR-SE"
+                size_hint: 2., 2.
+                on_release: app.salvaLogin(nome, fazenda)
+                on_release: app.root.current = 'home'
+<Home>:
+    FloatLayout:
+        canvas.before: 
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.jpg'
+    BoxLayout:
+        orientation: 'vertical'
+        ActionBar:
+            id: actBar
+            pos_hint: {'top':1}
+            background_normal: ''
+            background_down: ''
+            background_color: 0, 1, 0, 1
+
+            ActionView:
+                use_separator: True
+                ActionPrevious:
+                    app_icon_width: 0
+                    app_icon_height: 0
+                    id: mostranome
+                    title: 'Tela Inicial'
+                    with_previous: False
+
+                ActionOverflow:
+                
+                ActionGroup:
+                    text: 'CADASTRAR '
+                    ActionButton:
+                        text: 'EQUIPAMENTOS'
+                        on_press: app.root.current = 'equipamento'
+
+                    ActionButton:
+                        text: 'DESPESAS'
+                        on_press: app.root.current = 'despesa'
+
+                    ActionButton:
+                        text: 'VENDA'
+                        on_press: app.root.current = 'venda'
+
+                    ActionButton:
+                        text: 'PROPRIEDADE'
+                        on_press: app.root.current = 'propriedade'
+
+                ActionGroup:
+                    text: 'RELATORIOS'
+
+                    ActionButton:
+                        text: 'DESPESAS'
+                    ActionButton:
+                        text: 'GERAL'
+                        on_release: app.telaRelatorioGERAL()
+
+                ActionGroup:
+                    text: 'Ajuda'
+
+                    ActionButton:
+                        text: 'Sobre'
+                    ActionButton:
+                        text: 'Ajuda'
+
+<Equipamento>:
+    FloatLayout:
+        canvas.before: 
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.jpg'
+        
+        GridLayout:
+            cols: 1
+            spacing: 20
+            size_hint: .9, .4
+            pos_hint: {'center_x': .5, 'center_y': .5}
+
+            Label:
+                text:'INVENTARIO DE EQUIPAMENTOS'
+                size_hint_x: .6
+                color: get_color_from_hex('#FFFFFF')
+                bold: True 
+
+            TextInput:
+                hint_text: 'Nome do Equipamento'
+                multiline: False
+                id: descricao
+
+            TextInput:
+                hint_text:"Valor do equipamento R$"
+                multiline: False
+                id : valor
+                input_filter: 'float'
+
+            TextInput:
+                hint_text:"Anos de posse do equipamento"
+                multiline: False
+                id : TempoUso
+                input_filter: 'int'
+
+            TextInput:
+                hint_text:"Vida util do equipamento"
+                multiline: False
+                id : vidaUtil
+                input_filter: 'int'
+                
+            Button:
+                text:"INSERIR DADOS"
+                size_hint: 2., 2.
+                on_release: root.limpar()
+                on_release: app.guardaDados(descricao.text,valor.text,TempoUso.text,vidaUtil.text)
+                on_release: app.root.current = 'home'
+    BoxLayout:
+        orientation: 'vertical'
+        ActionBar:
+            id: actBar
+            pos_hint: {'top':1}  #na parte superior da tela
+            background_normal: '' #alteramos as cores
+            background_down: ''
+            background_color: 0, 1, 0, 1
+            ActionView:
+                use_separator: True
+                ActionPrevious:
+                    on_release: app.root.current = 'home'
+                    title: 'Equipamentos'
+
+
+<Despesas>:
+    FloatLayout:
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.jpg'
+            
+        GridLayout:
+            cols: 1
+            spacing: 20
+            size_hint: .9, .4
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            
+            Label:
+                text:'CUSTOS DE PRODUÇÃO'
+                size_hint_x: .6
+                color: get_color_from_hex('#FFFFFF')
+                bold: True 
+
+            TextInput:
+                hint_text: 'Ex:2019-10-15'
+                multiline: False
+                id: mes
+            
+            TextInput:
+                hint_text:"Descrição do gasto"
+                multiline: False
+                id: texto
+
+            TextInput:
+                hint_text:"Valor Gasto"
+                multiline: False
+                id : gastoMes
+                input_filter: 'float'
+
+            Button:
+                text:"INSERIR DADOS"
+                size_hint: 2., 2.
+                on_release: app.root.current = 'home'
+                on_release: root.limpar()
+                on_release: app.despesas(mes, texto, gastoMes)
+    BoxLayout:
+        orientation: 'vertical'
+        ActionBar:
+            id: actBar
+            pos_hint: {'top':1}  #na parte superior da tela
+            background_normal: '' #alteramos as cores
+            background_down: ''
+            background_color: 0, 1, 0, 1
+            ActionView:
+                use_separator: True
+                ActionPrevious:
+                    on_release: app.root.current = 'home'
+                    title: 'Despesas'
+
+<Venda>:
+    FloatLayout:
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.jpg'
+        GridLayout:
+            cols: 1
+            spacing: 20
+            size_hint: .9, .4
+            pos_hint: {'center_x': .5, 'center_y': .5}
+
+            Label:
+                text:'VENDAS DE PRODUTOS E ANIMAIS'
+                size_hint_x: .6
+                color: get_color_from_hex('#FFFFFF')
+                bold: True
+
+            TextInput:
+                hint_text: 'Descrição da Venda'
+                multiline: False
+                id: descrevaVenda
+
+            TextInput:
+                hint_text: 'Quantidade'
+                multiline: False
+                id: quantidadeVenda
+                input_filter: 'int'
+
+            TextInput:
+                hint_text: 'Valor da Venda'
+                multiline: False
+                id: valorVenda
+                input_filter: 'float'
+
+            Button:
+                text:"INSERIR DADOS"
+                size_hint: 2., 2.
+                on_release: app.root.current = 'home'
+                on_release: root.limpar()
+
+    BoxLayout:
+        orientation: 'vertical'
+        ActionBar:
+            id: actBar
+            pos_hint: {'top':1}
+            background_normal: ''
+            background_down: ''
+            background_color: 0, 1, 0, 1
+            ActionView:
+                use_separator: True
+                ActionPrevious:
+                    on_release: app.root.current = 'home'
+                    title: 'Venda'
+
+<Propriedade>:
+    FloatLayout:
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.jpg'
+
+        GridLayout:
+            cols: 1
+            spacing: 20
+            size_hint: .9, .4
+            pos_hint: {'center_x': .5, 'center_y': .5}
+
+            Label:
+                text:'PROPRIEDADE'
+                size_hint_x: .6
+                color: get_color_from_hex('#FFFFFF')
+                bold: True
+
+            TextInput:
+                hint_text: 'Endereço'
+                multiline: False
+                id: endereco
+
+            TextInput:
+                hint_text: 'Tamanho da fazenda'
+                multiline: False
+                id: tamanhoFazenda
+                input_filter: 'float'
+
+            TextInput:
+                hint_text: 'Tamanho da Lamina D\'agua'
+                multiline: False
+                id: tamanhoDagua
+                input_filter: 'float'
+
+            TextInput:
+                hint_text: 'Quantidade de tanques'
+                multiline: False
+                id: QtdTanques
+                input_filter: 'int'
+
+            Button:
+                text:"INSERIR DADOS"
+                size_hint: 2., 2.
+                on_release: app.root.current = 'home'
+                on_release: root.limpar()
+
+    BoxLayout:
+        orientation: 'vertical'
+        ActionBar:
+            id: actBar
+            pos_hint: {'top':1}
+            background_normal: ''
+            background_down: ''
+            background_color: 0, 1, 0, 1
+            ActionView:
+                use_separator: True
+                ActionPrevious:
+                    on_release: app.root.current = 'home'
+                    title: 'Propriedade'
+<RelatorioApp>
+    FloatLayout:
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'images/background.jpg'
+        GridLayout:
+            cols: 1
+            spacing: 5
+            size_hint: .7, .37
+            pos_hint: {'center_x': .5, 'center_y': .5}
+
+            Label:
+                text:'AQUI ESTAO TODAS SUAS INFORMACOES IMPORTANTES'
+                size_hint_x: .9
+                color: get_color_from_hex('#FFFFFF')
+                bold: True
+
+            Label:
+                text: 'Despesas TOTAIS'
+                font_name: 'Roboto-BoldItalic'
+                size_hint_x: .6
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+                color: get_color_from_hex('#FFFFFF')
+                bold: True
+            TextInput:
+                hint_text: ''
+                id: gastosTOTAIS
