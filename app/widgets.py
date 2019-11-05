@@ -36,7 +36,6 @@ class Equipamento(Screen):
         Window.unbind(on_keyboard=self.voltar)
 
 
-
 class Despesas(Screen):
     def limpar(self):
         self.ids['mes'].text = ''
