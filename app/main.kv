@@ -12,6 +12,8 @@
         name: 'propriedade'
     Venda:
         name: 'venda'
+    Relatorio:
+        name: 'relatorio'
 
 <Background@FloatLayout>:
     canvas.before:
@@ -25,6 +27,12 @@
     spacing: 5
     size_hint: .9, .4
     pos_hint: {"center_x": .5, "center_y": .5}
+    spacing: 20
+
+<TextDefault@TextInput>:
+    multiline: False
+    size_hint_y: None
+    height: 30
 
 <Login>:
     Background:
@@ -49,9 +57,8 @@
                 color: get_color_from_hex('#FFFFFF')
                 bold: True
 
-            TextInput:
+            TextDefault:
                 id: nome
-                multiline: False
 
             Label:
                 text: "Nome da fazenda:"
@@ -63,11 +70,11 @@
                 color: get_color_from_hex('#FFFFFF')
                 bold: True  
 
-            TextInput:
+            TextDefault:
                 id: fazenda
-                multiline: False
             
             Label:
+
             Button:
                 text: "REGISTRAR-SE"
                 size_hint: 2., 2.
@@ -120,7 +127,7 @@
                         text: 'DESPESAS'
                     ActionButton:
                         text: 'GERAL'
-                        on_release: app.telaRelatorioGERAL()
+                        on_release: app.root.current = 'relatorio'
 
                 ActionGroup:
                     text: 'Ajuda'
@@ -139,26 +146,22 @@
                 color: get_color_from_hex('#FFFFFF')
                 bold: True 
 
-            TextInput:
+            TextDefault:
                 hint_text: 'Nome do Equipamento'
-                multiline: False
                 id: descricao
 
-            TextInput:
+            TextDefault:
                 hint_text:"Valor do equipamento R$"
-                multiline: False
                 id : valor
                 input_filter: 'float'
 
-            TextInput:
+            TextDefault:
                 hint_text:"Anos de posse do equipamento"
-                multiline: False
                 id : TempoUso
                 input_filter: 'int'
 
-            TextInput:
+            TextDefault:
                 hint_text:"Vida util do equipamento"
-                multiline: False
                 id : vidaUtil
                 input_filter: 'int'
                 
@@ -168,6 +171,7 @@
                 on_release: root.limpar()
                 on_release: app.guardaDados(descricao.text,valor.text,TempoUso.text,vidaUtil.text)
                 on_release: app.root.current = 'home'
+
     BoxLayout:
         orientation: 'vertical'
         ActionBar:
@@ -192,19 +196,16 @@
                 color: get_color_from_hex('#FFFFFF')
                 bold: True 
 
-            TextInput:
+            TextDefault:
                 hint_text: 'Ex:2019-10-15'
-                multiline: False
                 id: mes
             
-            TextInput:
+            TextDefault:
                 hint_text:"Descrição do gasto"
-                multiline: False
                 id: texto
 
-            TextInput:
+            TextDefault:
                 hint_text:"Valor Gasto"
-                multiline: False
                 id : gastoMes
                 input_filter: 'float'
 
@@ -237,20 +238,17 @@
                 color: get_color_from_hex('#FFFFFF')
                 bold: True
 
-            TextInput:
+            TextDefault:
                 hint_text: 'Descrição da Venda'
-                multiline: False
                 id: descrevaVenda
 
-            TextInput:
+            TextDefault:
                 hint_text: 'Quantidade'
-                multiline: False
                 id: quantidadeVenda
                 input_filter: 'int'
 
-            TextInput:
+            TextDefault:
                 hint_text: 'Valor da Venda'
-                multiline: False
                 id: valorVenda
                 input_filter: 'float'
 
@@ -283,26 +281,22 @@
                 color: get_color_from_hex('#FFFFFF')
                 bold: True
 
-            TextInput:
+            TextDefault:
                 hint_text: 'Endereço'
-                multiline: False
                 id: endereco
 
-            TextInput:
+            TextDefault:
                 hint_text: 'Tamanho da fazenda'
-                multiline: False
                 id: tamanhoFazenda
                 input_filter: 'float'
 
-            TextInput:
+            TextDefault:
                 hint_text: 'Tamanho da Lamina D\'agua'
-                multiline: False
                 id: tamanhoDagua
                 input_filter: 'float'
 
-            TextInput:
+            TextDefault:
                 hint_text: 'Quantidade de tanques'
-                multiline: False
                 id: QtdTanques
                 input_filter: 'int'
 

@@ -90,3 +90,15 @@ class Propriedade(Screen):
     def on_pre_leave(self, *args):
         Window.unbind(on_keyboard=self.voltar)
 
+
+class Relatorio(Screen):
+    def on_pre_enter(self, *args):
+        Window.bind(on_keyboard=self.voltar)
+
+    def voltar(self, window, key, *args):
+        if key == 27:
+            App.get_running_app().root.current = 'home'
+            return True
+
+    def on_pre_leave(self, *args):
+        Window.unbind(on_keyboard=self.voltar)
