@@ -20,6 +20,12 @@
             size: self.size
             source: 'images/background.jpg'
 
+<GridLay@GridLayout>:
+    cols: 1
+    spacing: 5
+    size_hint: .9, .4
+    pos_hint: {"center_x": .5, "center_y": .5}
+
 <Login>:
     Background:
         Image:
@@ -32,12 +38,7 @@
             size_hint: .7, .1
             pos_hint: {"center_x": .5, "center_y": .55}
 
-        GridLayout:
-            cols: 1
-            spacing: 5
-            size_hint: .9, .4
-            pos_hint: {"center_x": .5, "center_y": .5}
-
+        GridLay:
             Label:
                 text: 'Nome do Proprietario'
                 font_name: 'Roboto-BoldItalic'
@@ -131,12 +132,7 @@
 
 <Equipamento>:
     Background:
-        GridLayout:
-            cols: 1
-            spacing: 20
-            size_hint: .9, .4
-            pos_hint: {'center_x': .5, 'center_y': .5}
-
+        GridLay:
             Label:
                 text:'INVENTARIO DE EQUIPAMENTOS'
                 size_hint_x: .6
@@ -189,12 +185,7 @@
 
 <Despesas>:
     Background:
-        GridLayout:
-            cols: 1
-            spacing: 20
-            size_hint: .9, .4
-            pos_hint: {'center_x': .5, 'center_y': .5}
-            
+        GridLay:
             Label:
                 text:'CUSTOS DE PRODUÇÃO'
                 size_hint_x: .6
@@ -239,12 +230,7 @@
 
 <Venda>:
     Background:
-        GridLayout:
-            cols: 1
-            spacing: 20
-            size_hint: .9, .4
-            pos_hint: {'center_x': .5, 'center_y': .5}
-
+        GridLay:
             Label:
                 text:'VENDAS DE PRODUTOS E ANIMAIS'
                 size_hint_x: .6
@@ -290,12 +276,7 @@
 
 <Propriedade>:
     Background:
-        GridLayout:
-            cols: 1
-            spacing: 20
-            size_hint: .9, .4
-            pos_hint: {'center_x': .5, 'center_y': .5}
-
+        GridLay:
             Label:
                 text:'PROPRIEDADE'
                 size_hint_x: .6
@@ -346,12 +327,7 @@
                     title: 'Propriedade'
 <Relatorio>
     Background:
-        GridLayout:
-            cols: 1
-            spacing: 5
-            size_hint: .7, .37
-            pos_hint: {'center_x': .5, 'center_y': .5}
-
+        GridLay:
             Label:
                 text:'AQUI ESTAO TODAS SUAS INFORMACOES IMPORTANTES'
                 size_hint_x: .9
