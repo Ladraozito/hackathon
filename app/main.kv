@@ -284,20 +284,34 @@
     Background:
         GridLay:
             Titulo:
-                text:'AQUI ESTAO TODAS SUAS INFORMACOES IMPORTANTES'
+                text:'INFORMACOES IMPORTANTES'
 
             Label:
                 text: 'Despesas TOTAIS'
                 font_name: 'Roboto-BoldItalic'
-                size_hint_x: .6
-                text_size: self.size
+                size_hint_y: None
+                text_size: self.width, None
+                height: self.texture_size[1]
                 halign: 'left'
                 valign: 'middle'
                 bold: True
 
-            TextInput:
-                hint_text: ''
+            Label:
                 id: gastosTOTAIS
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1
+                    Rectangle:
+                        pos: self.x, self.y
+                        size: self.width, self.height
+
+                text: 'R$ 5000,00'
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                size_y: 100
+                text_size: self.size
+                halign: 'left'
+                valign: 'top'
 
     Barra:
         texto: 'Relatorio'
