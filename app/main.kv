@@ -24,7 +24,7 @@
 <GridLay@GridLayout>:
     cols: 1
     spacing: 5
-    size_hint: .9, .4
+    size_hint: .9, .5
     pos_hint: {"center_x": .5, "center_y": .5}
     spacing: 20
 
@@ -36,6 +36,23 @@
 <Titulo@Label>:
     size_hint_x: .6
     bold: True
+
+<Barra@BoxLayout>:
+    texto: 'Indefinido'
+    orientation: 'vertical'
+    ActionBar:
+        id: actBar
+        pos_hint: {'top':1}
+        background_normal: ''
+        background_down: ''
+        background_color: 0, 1, 0, 1
+        ActionView:
+            id: actView
+            use_separator: True
+            ActionPrevious:
+                id: actPre
+                on_release: app.root.current = 'home'
+                title: root.texto
 
 <Login>:
     Background:
@@ -169,20 +186,8 @@
                 on_release: app.guardaDados(descricao.text,valor.text,TempoUso.text,vidaUtil.text)
                 on_release: app.root.current = 'home'
 
-    BoxLayout:
-        orientation: 'vertical'
-        ActionBar:
-            id: actBar
-            pos_hint: {'top':1}  #na parte superior da tela
-            background_normal: '' #alteramos as cores
-            background_down: ''
-            background_color: 0, 1, 0, 1
-            ActionView:
-                use_separator: True
-                ActionPrevious:
-                    on_release: app.root.current = 'home'
-                    title: 'Equipamentos'
-
+    Barra:
+        texto: 'Equipamento'
 
 <Despesas>:
     Background:
@@ -209,19 +214,8 @@
                 on_release: app.root.current = 'home'
                 on_release: root.limpar()
                 on_release: app.despesas(mes, texto, gastoMes)
-    BoxLayout:
-        orientation: 'vertical'
-        ActionBar:
-            id: actBar
-            pos_hint: {'top':1}  #na parte superior da tela
-            background_normal: '' #alteramos as cores
-            background_down: ''
-            background_color: 0, 1, 0, 1
-            ActionView:
-                use_separator: True
-                ActionPrevious:
-                    on_release: app.root.current = 'home'
-                    title: 'Despesas'
+    Barra:
+        texto: 'Despesas'
 
 <Venda>:
     Background:
@@ -249,19 +243,8 @@
                 on_release: app.root.current = 'home'
                 on_release: root.limpar()
 
-    BoxLayout:
-        orientation: 'vertical'
-        ActionBar:
-            id: actBar
-            pos_hint: {'top':1}
-            background_normal: ''
-            background_down: ''
-            background_color: 0, 1, 0, 1
-            ActionView:
-                use_separator: True
-                ActionPrevious:
-                    on_release: app.root.current = 'home'
-                    title: 'Venda'
+    Barra:
+        texto: 'Venda'
 
 <Propriedade>:
     Background:
@@ -294,19 +277,9 @@
                 on_release: app.root.current = 'home'
                 on_release: root.limpar()
 
-    BoxLayout:
-        orientation: 'vertical'
-        ActionBar:
-            id: actBar
-            pos_hint: {'top':1}
-            background_normal: ''
-            background_down: ''
-            background_color: 0, 1, 0, 1
-            ActionView:
-                use_separator: True
-                ActionPrevious:
-                    on_release: app.root.current = 'home'
-                    title: 'Propriedade'
+    Barra:
+        texto: 'Propriedade'
+
 <Relatorio>
     Background:
         GridLay:
@@ -325,3 +298,6 @@
             TextInput:
                 hint_text: ''
                 id: gastosTOTAIS
+
+    Barra:
+        texto: 'Relatorio'
