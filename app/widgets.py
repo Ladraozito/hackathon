@@ -3,6 +3,8 @@ from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.core.window import Window
 from kivy.app import App
 
+import sqlite3 as lite
+
 
 class Gerenciador(ScreenManager):
     pass
@@ -94,6 +96,13 @@ class Propriedade(Screen):
 class Relatorio(Screen):
     def on_pre_enter(self, *args):
         Window.bind(on_keyboard=self.voltar)
+        conn = lite.connect('./dados.db')
+        cursor = conn.cursor()
+        cursor.execute('SELECT valor_despesa FROM despesas')
+        soma = 0
+        for gasto in cursor.fetchall():
+            soma += gasto[0]
+        self.ids.gastosTOTAIS.text = 'R$' + str(soma).replace('.', ',')
 
     def voltar(self, window, key, *args):
         if key == 27:
