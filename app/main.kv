@@ -15,7 +15,10 @@
         name: 'relatorio'
 
 <Background@FloatLayout>:
+    cores: 1, 1, 1, 1
     canvas.before:
+        Color:
+            rgba: root.cores
         Rectangle:
             pos: self.pos
             size: self.size
@@ -56,6 +59,7 @@
 
 <Login>:
     Background:
+        cores: 0, .7, 0, 1
         Image:
             size_hint: .3, .2,
             pos_hint: {"center_x": .5, "center_y": .75}
