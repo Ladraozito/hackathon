@@ -2,7 +2,7 @@
 
 Aplicativo para o desafio de programação realizado no IFRO _Campus Calama_
 
-![icone.png](app/images/icone.png)
+![icone.png](./images/icone.png)
 
 ## Tecnologias utilizadas
 
