@@ -7,3 +7,23 @@ class Gerenciador(ScreenManager):
 
 class Principal(Screen):
     pass
+
+
+class Equipamentos(Screen):
+    pass
+
+
+class Despesas(Screen):
+    pass
+
+
+class Venda(Screen):
+    pass
+
+
+class Propriedade(Screen):
+    pass
+
+
+class Relatorio(Screen):
+    pass

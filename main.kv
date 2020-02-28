@@ -1,11 +1,68 @@
 <Gerenciador>:
     Principal:
         name: 'principal'
+    Equipamentos:
+        name: 'equipamentos'
+    Despesas:
+        name: 'despesas'
+    Venda:
+        name: 'venda'
+    Propriedade:
+        name: 'propriedade'
+    Relatorio:
+        name: 'relatorio'
 
-<Principal>:
+<Comum@BoxLayout>:
+    nome: 'nada'
+    orientation: 'vertical'
     canvas:
         Color:
             rgba: .5, .5, .9, 1
         Rectangle:
             pos: self.pos
             size: self.size
+
+    Label:
+        canvas.before:
+            Color:
+                rgba: .0, .4, .0, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        size_hint_y: None
+        height: 50
+        padding_x: 10
+        text_size: self.size
+        font_size: 20
+        halign: 'left'
+        valign: 'middle'
+        color: 1, 1, 1, 1
+        text: root.nome
+
+    BoxLayout:
+
+
+<Principal>:
+    Comum:
+        nome: root.name
+
+<Equipamentos>:
+    Comum:
+        nome: root.name
+
+<Despesas>:
+    Comum:
+        nome: root.name
+
+<Venda>:
+    Comum:
+        nome: root.name
+
+<Propriedade>:
+    Comum:
+        nome: root.name
+
+<Relatorio>:
+    Comum:
+        nome: root.name
