@@ -1,12 +1,10 @@
-import kivy
-from kivy.lang import Builder
 from kivy.app import App
 from mywidgets import *
 
 
 class Main(App):
-    def builder(self):
-        pass
+    def build(self):
+        return Gerenciador()
 
 
 if __name__ == '__main__':
